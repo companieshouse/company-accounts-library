@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>uk.gov.companieshouse</groupId>
   <artifactId>company-accounts-library</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>unversioned</version>
   <packaging>jar</packaging>
   <name>company-accounts-library</name>
 
@@ -12,13 +12,11 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
     <!-- Dependency Versions -->
-    <avro.version>1.8.1</avro.version>
     <commons-codec-version>1.9</commons-codec-version>
     <commons-io.version>2.4</commons-io.version>
     <jacoco-maven-plugin.version>0.7.7.201606060606</jacoco-maven-plugin.version>
     <junit.version>4.12</junit.version>
     <maven-compiler-plugin.version>3.5.1</maven-compiler-plugin.version>
-    <snakeyaml.version>1.17</snakeyaml.version>
     <structured-logging.version>1.2.0-rc1</structured-logging.version>
 
     <!-- JDK -->
@@ -53,19 +51,9 @@
       <version>${commons-io.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.apache.avro</groupId>
-      <artifactId>avro</artifactId>
-      <version>${avro.version}</version>
-    </dependency>
-    <dependency>
       <groupId>org.sonarsource.scanner.maven</groupId>
       <artifactId>sonar-maven-plugin</artifactId>
       <version>${sonar-maven-plugin.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.yaml</groupId>
-      <artifactId>snakeyaml</artifactId>
-      <version>${snakeyaml.version}</version>
     </dependency>
     <dependency>
       <groupId>uk.gov.companieshouse</groupId>
