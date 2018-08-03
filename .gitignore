@@ -1,4 +1,4 @@
-#IntelliJ files
+# IntelliJ files
 .idea
 *.iml
  # Eclipse files
@@ -10,3 +10,5 @@
  # Avoid ignoring Maven wrapper jar file (.jar files are usually ignored)
 !/.mvn/wrapper/maven-wrapper.jar
 /target/
+
+company-accounts-library.jar
