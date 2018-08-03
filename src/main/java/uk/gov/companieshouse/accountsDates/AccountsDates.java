@@ -59,6 +59,36 @@ public class AccountsDates {
 
 		return timeObject;
 	}
+	
+	/**
+	 * @param periodStart
+	 * @param periodEnd
+	 * @param isSameYear
+	 * @return
+	 * 
+	 * 	Generate balance sheet header string based on 
+	 *  period start and end dates
+	 * 
+	 */
+	public String generateBalanceSheetHeading(String periodStartString, String periodEndString, boolean isSameYear) {
+
+		Instant instantPeriodStart = Instant.parse(periodStartString);
+		Instant instantPeriodEnd = Instant.parse(periodEndString);
+
+		LocalDateTime localDateTimePeriodStart = LocalDateTime.ofInstant(instantPeriodStart, ZoneId.of("GMT"));
+		LocalDate localDatePeriodStart = localDateTimePeriodStart.toLocalDate();
+
+		LocalDateTime localDateTimePeriodEnd = LocalDateTime.ofInstant(instantPeriodEnd, ZoneId.of("GMT"));
+		LocalDate localDatePeriodEnd = localDateTimePeriodEnd.toLocalDate();
+
+		Map<String, String> resultdates = calculatePeriodRange(localDatePeriodStart, localDatePeriodEnd, isSameYear);
+
+		if (resultdates.get("periodStart") == null) {
+			return resultdates.get("periodEnd");
+		} else {
+			return resultdates.get("periodStart") + " to " + resultdates.get("periodEnd");
+		}
+	}
 
 	/**
 	 * @param periodStart
@@ -66,8 +96,8 @@ public class AccountsDates {
 	 * @param isSameYear
 	 * @return
 	 * 
-	 * 		Generates balance sheet dates headings depending on range between
-	 *         period start and end dates
+	 * 	Calculate balance sheet dates display format depending on range between
+	 *  period start and end dates
 	 * 
 	 */
 	public Map<String, String> calculatePeriodRange(LocalDate periodStart, LocalDate periodEnd, boolean isSameYear) {
@@ -166,23 +196,4 @@ public class AccountsDates {
 		return futureDays;
 	}
 
-	public String generateBalanceSheetHeading(String periodStartString, String periodEndString, boolean isSameYear) {
-
-		Instant instantPeriodStart = Instant.parse(periodStartString);
-		Instant instantPeriodEnd = Instant.parse(periodEndString);
-
-		LocalDateTime localDateTimePeriodStart = LocalDateTime.ofInstant(instantPeriodStart, ZoneId.of("GMT"));
-		LocalDate localDatePeriodStart = localDateTimePeriodStart.toLocalDate();
-
-		LocalDateTime localDateTimePeriodEnd = LocalDateTime.ofInstant(instantPeriodEnd, ZoneId.of("GMT"));
-		LocalDate localDatePeriodEnd = localDateTimePeriodEnd.toLocalDate();
-
-		Map<String, String> resultdates = calculatePeriodRange(localDatePeriodStart, localDatePeriodEnd, isSameYear);
-
-		if (resultdates.get("periodStart") == null) {
-			return resultdates.get("periodEnd");
-		} else {
-			return resultdates.get("periodStart") + " to " + resultdates.get("periodEnd");
-		}
-	}
 }
