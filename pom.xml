@@ -17,7 +17,6 @@
     <jacoco-maven-plugin.version>0.7.7.201606060606</jacoco-maven-plugin.version>
     <maven-compiler-plugin.version>3.5.1</maven-compiler-plugin.version>
     <structured-logging.version>1.2.0-rc1</structured-logging.version>
-    <org.springframework.version>4.1.0.RELEASE</org.springframework.version>
 
     <!-- JUnit testing -->
     <junit-jupiter-engine.version>5.2.0</junit-jupiter-engine.version>
@@ -76,12 +75,6 @@
       <artifactId>junit-jupiter-api</artifactId>
       <version>${junit-jupiter-api.version}</version>
       <scope>test</scope>
-    </dependency>
-<!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
-    <dependency> 
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-core</artifactId>
-      <version>${org.springframework.version}</version>
     </dependency>
   </dependencies>
 
