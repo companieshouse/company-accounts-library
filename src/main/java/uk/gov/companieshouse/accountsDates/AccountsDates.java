@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
 import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -73,7 +74,7 @@ public class AccountsDates {
 
         Instant instant = Instant.parse(dateString);
 
-        LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, ZoneId.of("GMT"));
+        LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, ZoneId.of(ZoneOffset.UTC.getId()));
         LocalDate localDate = localDateTime.toLocalDate();
 
         DateTimeFormatter dateFormatDesired = DateTimeFormatter.ofPattern(DATE_FORMAT_D_MMMM_YYYY);
@@ -103,12 +104,9 @@ public class AccountsDates {
 
         Instant instantPeriodStart = Instant.parse(periodStartString);
         Instant instantPeriodEnd = Instant.parse(periodEndString);
-
-        LocalDateTime localDateTimePeriodStart = LocalDateTime.ofInstant(instantPeriodStart, ZoneId.of("GMT"));
-        LocalDate localDatePeriodStart = localDateTimePeriodStart.toLocalDate();
-
-        LocalDateTime localDateTimePeriodEnd = LocalDateTime.ofInstant(instantPeriodEnd, ZoneId.of("GMT"));
-        LocalDate localDatePeriodEnd = localDateTimePeriodEnd.toLocalDate();
+        
+        LocalDate localDatePeriodStart = LocalDateTime.ofInstant(instantPeriodStart, ZoneId.of(ZoneOffset.UTC.getId())).toLocalDate();
+        LocalDate localDatePeriodEnd = LocalDateTime.ofInstant(instantPeriodEnd, ZoneId.of(ZoneOffset.UTC.getId())).toLocalDate();
 
         Map<String, String> resultDates = calculatePeriodRange(localDatePeriodStart, localDatePeriodEnd, isSameYear);
 
