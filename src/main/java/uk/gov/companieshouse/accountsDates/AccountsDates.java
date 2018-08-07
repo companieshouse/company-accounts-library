@@ -20,17 +20,36 @@ public class AccountsDates {
     private static final String DATE_FORMAT_YYYYMMDD = "yyyy-MM-dd";
     private static final String DATE_FORMAT_D_MMMM_YYYY = "d MMMM yyyy";
 
+    /**
+     * 
+     * Takes a {@link String} and converts it to a Java 8 {@link LocalDate}
+     * 
+     * @param stringDate
+     * @return
+     * 
+     */
     public LocalDate convertStringToDate(String stringDate) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT_YYYYMMDD);
         return LocalDate.parse(stringDate, formatter);
     }
 
+    /**
+     * Takes a Java 8 {@link LocalDate} and converts it to a {@link String}
+     * 
+     * @param date
+     * @return
+     */
     public String convertDateToString(LocalDate date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT_YYYYMMDD);
         return date.format(formatter);
     }
 
-    // from 2017-03-05 to 3 March 2005
+    /**
+     * Formats a {@link String} date from format '2017-03-05' to '3 March 2005'
+     * 
+     * @param stringDate
+     * @return
+     */
     public String convertStringToDisplayDate(String stringDate) {
 
         DateTimeFormatter dateFormatOriginal = DateTimeFormatter.ofPattern(DATE_FORMAT_YYYYMMDD);
@@ -40,6 +59,13 @@ public class AccountsDates {
         return date.format(dateFormatDesired);
     }
 
+    /**
+     * Returns a date and time object from given date/time string in the format 'D_MMMM_YYYY' 'h:mm a'
+     * 
+     * @param dateString
+     * @return
+     * 
+     */
     public Map<String, String> getDateAndTime(String dateString) {
         Map<String, String> timeObject = new HashMap<>();
 
@@ -61,13 +87,14 @@ public class AccountsDates {
     }
 
     /**
-     * @param periodStart
-     * @param periodEnd
+     * 
+     * Generate balance sheet header string to display on web and ixbrl templates based on period start and end
+     * dates
+     * 
+     * @param periodStartString accounting period start date 
+     * @param periodEndString accounting period end date 
      * @param isSameYear
      * @return
-     * 
-     *         Generate balance sheet header string based on period start and end
-     *         dates
      * 
      */
     public String generateBalanceSheetHeading(String periodStartString, String periodEndString, boolean isSameYear) {
@@ -84,26 +111,27 @@ public class AccountsDates {
         Map<String, String> resultDates = calculatePeriodRange(localDatePeriodStart, localDatePeriodEnd, isSameYear);
 
         if (!resultDates.containsKey(PERIOD_START)) {
-            return resultDates.get(PERIOD_END);   
-        }
-       else {
+            return resultDates.get(PERIOD_END);
+        } else {
             return resultDates.get(PERIOD_START) + " to " + resultDates.get(PERIOD_END);
         }
     }
 
     /**
-     * @param periodStart
-     * @param periodEnd
+     *Calculate balance sheet dates display format depending on range between period start and end dates
+     * 
+     * 
+     * @param periodStart accounting period start date
+     * @param periodEnd accounting period end date 
      * @param isSameYear
      * @return
      * 
-     *         Calculate balance sheet dates display format depending on range
-     *         between period start and end dates
      * 
      */
     public Map<String, String> calculatePeriodRange(LocalDate periodStart, LocalDate periodEnd, boolean isSameYear) {
 
-        int allowance = 15; // We allow year +/-15 days difference between dates to treat them as full year difference
+        int allowance = 15; // We allow year +/-15 days difference between dates to treat them as full year
+                            // difference
         int yearRangeMax = 365 + allowance;
         int yearRangeMin = 365 - allowance;
 
@@ -113,32 +141,35 @@ public class AccountsDates {
         // days
         Period accountsPeriod = Period.between(periodStart, periodEnd);
 
-        long totalDaysDiff = ChronoUnit.DAYS.between(periodStart, periodEnd) + 1; // + 1 as they have time till the end of the day
+        long totalDaysDiff = ChronoUnit.DAYS.between(periodStart, periodEnd) + 1; // + 1 as they have time till the end
+                                                                                  // of the day
         long totalMonthsDiff = ChronoUnit.MONTHS.between(periodStart, periodEnd);
 
         // If the days over an exact month are 1 to 15, then round down (unless
         // the period is less than 1 month, in which case round up).
         // If the days over are 16 to 31, then round up. e.g. 15 months and 4 days is
         // shown as 15 months; 15 months and 21 days is shown as 16 months.
-        totalMonthsDiff = (accountsPeriod.getDays() >= 15) ? totalMonthsDiff + 1 : totalMonthsDiff; // + 1 to days to include end date
-                                                                                                   
+        totalMonthsDiff = (accountsPeriod.getDays() >= 15) ? totalMonthsDiff + 1 : totalMonthsDiff; // + 1 to days to
+                                                                                                    // include end date
+
         // If the previous and current periods both end in the same year, then the
         // heading is output as a full date e.g. ‘5 January 2015’ ’31 December 2015’.
         if (isSameYear) {
             periodObject.put(PERIOD_END, convertStringToDisplayDate(convertDateToString(periodEnd)));
+
+            return periodObject;
         }
 
-        // If the accounting period is twelve months (+/- 15 days - period start to
-        // period end)
+        // If the accounting period is twelve months (+/- 15 days - period start to period end)
         // Then the heading for the balance sheet figures is: ccyy e.g. 2015 2016
         else if (totalDaysDiff >= yearRangeMin && totalDaysDiff <= yearRangeMax) {
-
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy");
             periodObject.put(PERIOD_END, periodEnd.format(formatter));
+
+            return periodObject;
         }
 
-        // If the accounting period is less than twelve months (<350 days - period start
-        // to period end) or
+        // If the accounting period is less than twelve months (<350 days - period start to period end) or
         // more than twelve months (>380 days - period start to period end)
         // Then the heading for the balance sheet figures is 'x' months to dd/mm/yyyy
         // e.g. 15 months to 31/12/2016
@@ -146,13 +177,23 @@ public class AccountsDates {
             String monthsDiffString = (totalMonthsDiff == 1) ? " month" : " months";
             periodObject.put(PERIOD_START, totalMonthsDiff + monthsDiffString);
             periodObject.put(PERIOD_END, convertStringToDisplayDate(convertDateToString(periodEnd)));
+
+            return periodObject;
         }
-        return periodObject;
     }
 
+    /**
+     * 
+     * Returns true if given Java 8 {@link LocalDate} dates are in the same calendar year
+     * 
+     * @param date1
+     * @param date2
+     * @return
+     * 
+     */
     public boolean isSameYear(LocalDate date1, LocalDate date2) {
 
-        return date1.getYear()==date2.getYear();
+        return date1.getYear() == date2.getYear();
     }
 
     /**
@@ -166,6 +207,12 @@ public class AccountsDates {
         return date != null ? date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate() : null;
     }
 
+    /**
+     * Returns numDays number of LocalDates prior to currentDate
+     * @param currentDate
+     * @param numDays
+     * @return
+     */
     public List<LocalDate> getPreviousDays(LocalDate currentDate, int numDays) {
         List<LocalDate> previousDays = new ArrayList<>();
 
@@ -176,6 +223,15 @@ public class AccountsDates {
         return previousDays;
     }
 
+    /**
+     * Returns numDays number of LocalDates in an ArrayList after currentDate 
+     * or future dates up to and including todays date
+     * 
+     * @param currentDate - date which to calculate future dates from
+     * @param numDays - number of days after of currentDate to add to arrayList
+     * @param now - today's date
+     * @return
+     */
     public List<LocalDate> getFutureDays(LocalDate currentDate, int numDays) {
         List<LocalDate> futureDays = new ArrayList<>();
         LocalDate now = LocalDate.now();
