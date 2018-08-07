@@ -81,12 +81,13 @@ public class AccountsDates {
         LocalDateTime localDateTimePeriodEnd = LocalDateTime.ofInstant(instantPeriodEnd, ZoneId.of("GMT"));
         LocalDate localDatePeriodEnd = localDateTimePeriodEnd.toLocalDate();
 
-        Map<String, String> resultdates = calculatePeriodRange(localDatePeriodStart, localDatePeriodEnd, isSameYear);
+        Map<String, String> resultDates = calculatePeriodRange(localDatePeriodStart, localDatePeriodEnd, isSameYear);
 
-        if (resultdates.get("periodStart") == null) {
-            return resultdates.get("periodEnd");
-        } else {
-            return resultdates.get("periodStart") + " to " + resultdates.get("periodEnd");
+        if (!resultDates.containsKey(PERIOD_START)) {
+            return resultDates.get(PERIOD_END);   
+        }
+       else {
+            return resultDates.get(PERIOD_START) + " to " + resultDates.get(PERIOD_END);
         }
     }
 
@@ -102,8 +103,7 @@ public class AccountsDates {
      */
     public Map<String, String> calculatePeriodRange(LocalDate periodStart, LocalDate periodEnd, boolean isSameYear) {
 
-        int allowance = 15; // We allow year +/-15 days difference between dates to treat them as full year
-                            // difference
+        int allowance = 15; // We allow year +/-15 days difference between dates to treat them as full year difference
         int yearRangeMax = 365 + allowance;
         int yearRangeMin = 365 - allowance;
 
@@ -113,31 +113,26 @@ public class AccountsDates {
         // days
         Period accountsPeriod = Period.between(periodStart, periodEnd);
 
-        long totalDaysDiff = ChronoUnit.DAYS.between(periodStart, periodEnd) + 1; // + 1 as they have time till the end
-                                                                                  // of the day
+        long totalDaysDiff = ChronoUnit.DAYS.between(periodStart, periodEnd) + 1; // + 1 as they have time till the end of the day
         long totalMonthsDiff = ChronoUnit.MONTHS.between(periodStart, periodEnd);
 
         // If the days over an exact month are 1 to 15, then round down (unless
         // the period is less than 1 month, in which case round up).
         // If the days over are 16 to 31, then round up. e.g. 15 months and 4 days is
         // shown as 15 months; 15 months and 21 days is shown as 16 months.
-        totalMonthsDiff = (accountsPeriod.getDays() >= 15) ? totalMonthsDiff + 1 : totalMonthsDiff; // + 1 to days to
-                                                                                                    // include end date
-                                                                                                    // in calculation
-
+        totalMonthsDiff = (accountsPeriod.getDays() >= 15) ? totalMonthsDiff + 1 : totalMonthsDiff; // + 1 to days to include end date
+                                                                                                   
         // If the previous and current periods both end in the same year, then the
         // heading is output as a full date e.g. ‘5 January 2015’ ’31 December 2015’.
         if (isSameYear) {
-            periodObject.put(PERIOD_START, null);
             periodObject.put(PERIOD_END, convertStringToDisplayDate(convertDateToString(periodEnd)));
         }
 
         // If the accounting period is twelve months (+/- 15 days - period start to
         // period end)
         // Then the heading for the balance sheet figures is: ccyy e.g. 2015 2016
-        else if ((totalDaysDiff >= yearRangeMin && totalDaysDiff <= yearRangeMax) && totalMonthsDiff == 12) {
+        else if (totalDaysDiff >= yearRangeMin && totalDaysDiff <= yearRangeMax) {
 
-            periodObject.put(PERIOD_START, null);
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy");
             periodObject.put(PERIOD_END, periodEnd.format(formatter));
         }
@@ -147,12 +142,11 @@ public class AccountsDates {
         // more than twelve months (>380 days - period start to period end)
         // Then the heading for the balance sheet figures is 'x' months to dd/mm/yyyy
         // e.g. 15 months to 31/12/2016
-        else if (totalDaysDiff < yearRangeMin || totalDaysDiff > yearRangeMax) {
+        else {
             String monthsDiffString = (totalMonthsDiff == 1) ? " month" : " months";
             periodObject.put(PERIOD_START, totalMonthsDiff + monthsDiffString);
             periodObject.put(PERIOD_END, convertStringToDisplayDate(convertDateToString(periodEnd)));
         }
-
         return periodObject;
     }
 

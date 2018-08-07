@@ -1,6 +1,7 @@
 package uk.gov.companieshouse.accountsDates;
 
 import java.text.ParseException;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -144,7 +145,7 @@ public class accountsDatesTest {
 		LocalDate testDateEndLast = LocalDate.parse("2017-08-12");
 		LocalDate testDateEndNext = LocalDate.parse("2017-11-23");
 		Map<String, String> periodMap = datesHelper.calculatePeriodRange(testDateEndLast, testDateEndNext, true);
-		assertEquals(null, periodMap.get(PERIOD_START));
+		assertNull(periodMap.get(PERIOD_START));
 		assertEquals("23 November 2017", periodMap.get(PERIOD_END));
 	}
 
@@ -159,7 +160,7 @@ public class accountsDatesTest {
 
 		System.out.println("periodEndDate: " + testDateStart);
 		Map<String, String> periodMap = datesHelper.calculatePeriodRange(testDateStart, testDateEnd, false);
-		assertEquals(null, periodMap.get(PERIOD_START));
+		assertNull(periodMap.get(PERIOD_START));
 		assertEquals("2017", periodMap.get(PERIOD_END));
 
 	}
@@ -245,9 +246,9 @@ public class accountsDatesTest {
 		assertEquals("13 months to 16 February 2016",
 				datesHelper.generateBalanceSheetHeading("2015-02-01T00:00:00.000Z", "2016-02-16T00:00:00.000Z", false));
 
-		// Test 336 days shows month (less than 12 month period)
-		assertEquals("11 months to 1 July 2016",
-				datesHelper.generateBalanceSheetHeading("2015-08-01T00:00:00.000Z", "2016-07-01T00:00:00.000Z", false));
+		// Test 349 days shows month (less than 12 month period)
+		assertEquals("11 months to 1 January 2017",
+				datesHelper.generateBalanceSheetHeading("2016-01-19T00:00:00.000Z", "2017-01-01T00:00:00.000Z", false));
 
 		// Test exactly 381 days shows months leap year
 		assertEquals("13 months to 16 February 2015",
@@ -260,7 +261,7 @@ public class accountsDatesTest {
 		// "Test exactly 351 days show yyyy"
 		assertEquals("2015",
 				datesHelper.generateBalanceSheetHeading("2014-04-01T00:00:00.000Z", "2015-03-16T00:00:00.000Z", false));
-
+		
 		// Test exactly 351 days show years leap year
 		assertEquals("2016",
 				datesHelper.generateBalanceSheetHeading("2015-04-01T00:00:00.000Z", "2016-03-16T00:00:00.000Z", false));
