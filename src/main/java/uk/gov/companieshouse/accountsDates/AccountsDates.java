@@ -13,6 +13,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.lang.NonNull;
+
 public class AccountsDates {
 
     private static final String PERIOD_START = "periodStart";
@@ -203,9 +205,9 @@ public class AccountsDates {
      * @return {@link LocalDate}
      */
 
-    public LocalDate convertDateToLocalDate(Date date) {
-        return date != null ? date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate() : null;
-    }
+    public LocalDate convertDateToLocalDate(@NonNull Date date) {
+        return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+     }
 
     /**
      * Returns numDays number of LocalDates prior to currentDate
