@@ -157,11 +157,8 @@ public class AccountsDates {
     }
 
     public boolean isSameYear(LocalDate date1, LocalDate date2) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy");
-        String stringDate1 = date1.format(formatter);
-        String stringDate2 = date2.format(formatter);
 
-        return stringDate1.equals(stringDate2);
+        return date1.getYear()==date2.getYear();
     }
 
     /**
