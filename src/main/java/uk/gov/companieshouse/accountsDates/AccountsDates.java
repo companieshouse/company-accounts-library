@@ -51,13 +51,13 @@ public class AccountsDates {
      * @param stringDate
      * @return
      */
-    public String convertStringToDisplayDate(String stringDate) {
+    public String convertLocalDateToDisplayDate(LocalDate stringDate) {
 
-        DateTimeFormatter dateFormatOriginal = DateTimeFormatter.ofPattern(DATE_FORMAT_YYYYMMDD);
+   
         DateTimeFormatter dateFormatDesired = DateTimeFormatter.ofPattern(DATE_FORMAT_D_MMMM_YYYY);
-        LocalDate date = LocalDate.parse(stringDate, dateFormatOriginal);
+      
 
-        return date.format(dateFormatDesired);
+        return stringDate.format(dateFormatDesired);
     }
 
     /**
@@ -153,7 +153,7 @@ public class AccountsDates {
         // If the previous and current periods both end in the same year, then the
         // heading is output as a full date e.g. ‘5 January 2015’ ’31 December 2015’.
         if (isSameYear) {
-            periodObject.put(PERIOD_END, convertStringToDisplayDate(convertDateToString(periodEnd)));
+            periodObject.put(PERIOD_END, convertLocalDateToDisplayDate(periodEnd));
 
             return periodObject;
         }
@@ -174,7 +174,7 @@ public class AccountsDates {
         else {
             String monthsDiffString = (totalMonthsDiff == 1) ? " month" : " months";
             periodObject.put(PERIOD_START, totalMonthsDiff + monthsDiffString);
-            periodObject.put(PERIOD_END, convertStringToDisplayDate(convertDateToString(periodEnd)));
+            periodObject.put(PERIOD_END, convertLocalDateToDisplayDate(periodEnd));
 
             return periodObject;
         }

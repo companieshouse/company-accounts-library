@@ -41,15 +41,15 @@ public class accountsDatesTest {
 	}
 
 	@Test
-	public void convertStringtoDisplayDate() {
+	public void convertLocalDatetoDisplayDate() {
 
-		String date = datesHelper.convertStringToDisplayDate("2017-03-05");
+		String date = datesHelper.convertLocalDateToDisplayDate(LocalDate.parse("2017-03-05"));
 		assertEquals("5 March 2017", date);
 
-		date = datesHelper.convertStringToDisplayDate("2010-11-12");
+		date = datesHelper.convertLocalDateToDisplayDate(LocalDate.parse("2010-11-12"));
 		assertEquals("12 November 2010", date);
 
-		date = datesHelper.convertStringToDisplayDate("2015-02-27");
+		date = datesHelper.convertLocalDateToDisplayDate(LocalDate.parse("2015-02-27"));
 		assertEquals("27 February 2015", date);
 
 	}
