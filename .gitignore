@@ -1,15 +1,14 @@
 # IntelliJ files
 .idea
 *.iml
-
-# Eclipse files
+ # Eclipse files
 .classpath
 .project
 .settings
 /bin/
-
-company-accounts-library.jar
-
-# Avoid ignoring Maven wrapper jar file (.jar files are usually ignored)
+ company-accounts-library.jar
+ # Avoid ignoring Maven wrapper jar file (.jar files are usually ignored)
 !/.mvn/wrapper/maven-wrapper.jar
 /target/
+
+company-accounts-library.jar
