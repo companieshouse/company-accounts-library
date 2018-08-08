@@ -53,9 +53,7 @@ public class AccountsDates {
      */
     public String convertLocalDateToDisplayDate(LocalDate stringDate) {
 
-   
         DateTimeFormatter dateFormatDesired = DateTimeFormatter.ofPattern(DATE_FORMAT_D_MMMM_YYYY);
-      
 
         return stringDate.format(dateFormatDesired);
     }
