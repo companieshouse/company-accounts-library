@@ -48,14 +48,14 @@ public class AccountsDates {
     /**
      * Formats a {@link String} date from format '2017-03-05' to '3 March 2005'
      * 
-     * @param stringDate
+     * @param date
      * @return
      */
-    public String convertLocalDateToDisplayDate(LocalDate stringDate) {
+    public String convertLocalDateToDisplayDate(LocalDate date) {
 
         DateTimeFormatter dateFormatDesired = DateTimeFormatter.ofPattern(DATE_FORMAT_D_MMMM_YYYY);
 
-        return stringDate.format(dateFormatDesired);
+        return date.format(dateFormatDesired);
     }
 
     /**
