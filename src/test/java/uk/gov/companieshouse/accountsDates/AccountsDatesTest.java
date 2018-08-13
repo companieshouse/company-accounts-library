@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
 
 import uk.gov.companieshouse.accountsDates.AccountsDates;
 
-public class accountsDatesTest {
+public class AccountsDatesTest {
 
 	private static final String YYYY_MM_DD = "yyyy-MM-dd";
 	private static final String PERIOD_START = "periodStart";
