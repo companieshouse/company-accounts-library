@@ -18,7 +18,6 @@ import org.springframework.stereotype.Service;
 
 import uk.gov.companieshouse.accountsDates.AccountsDates;
 
-@Service
 public class AccountsDatesImpl implements AccountsDates {
 
     private static final String PERIOD_START = "periodStart";
