@@ -18,6 +18,7 @@
     <maven-compiler-plugin.version>3.5.1</maven-compiler-plugin.version>
     <maven-surefire-plugin.version>2.21.0</maven-surefire-plugin.version>
     <structured-logging.version>1.2.0-rc1</structured-logging.version>
+    <spring-framework.version>5.0.8.RELEASE</spring-framework.version>
 
     <!-- JUnit testing -->
     <junit-jupiter-engine.version>5.2.0</junit-jupiter-engine.version>
@@ -64,6 +65,13 @@
       <artifactId>structured-logging</artifactId>
       <version>${structured-logging.version}</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+      <version>${spring-framework.version}</version>
+    </dependency>
+    
 
     <!-- Test -->
     <dependency>
