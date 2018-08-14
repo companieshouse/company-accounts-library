@@ -1,4 +1,4 @@
-package uk.gov.companieshouse.accountsDates;
+package uk.gov.companieshouse.accountsDates.impl;
 
 import java.text.ParseException;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -15,16 +15,16 @@ import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
-import uk.gov.companieshouse.accountsDates.AccountsDates;
+import uk.gov.companieshouse.accountsDates.impl.AccountsDatesImpl;
 
-public class AccountsDatesTest {
+public class AccountsDatesImplTest {
 
 	private static final String YYYY_MM_DD = "yyyy-MM-dd";
 	private static final String PERIOD_START = "periodStart";
 	private static final String PERIOD_END = "periodEnd";
 
 	private SimpleDateFormat simpleDateFormat;
-	private AccountsDates datesHelper = new AccountsDates();
+	private AccountsDatesImpl datesHelper = new AccountsDatesImpl();
 
 	@Test
 	public void convertStringtoDate() throws ParseException {
