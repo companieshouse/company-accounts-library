@@ -14,11 +14,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import uk.gov.companieshouse.accountsDates.AccountsDates;
 
-@Component
+@Service
 public class AccountsDatesImpl implements AccountsDates {
 
     private static final String PERIOD_START = "periodStart";

@@ -1,10 +1,14 @@
 package uk.gov.companieshouse.accountsDates;
 
 import java.time.LocalDate;
+
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public interface AccountsDates {
     
     /**
