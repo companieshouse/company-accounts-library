@@ -46,7 +46,6 @@ public class AccountsDatesImpl implements AccountsDates {
      * 
      */
     public LocalDate getLocalDatefromDateTimeString(String dateTimeString) {
-
         Instant instant = Instant.parse(dateTimeString);
         LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, ZoneId.of(ZoneOffset.UTC.getId()));
 

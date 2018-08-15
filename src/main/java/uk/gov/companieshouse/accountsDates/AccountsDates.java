@@ -21,6 +21,16 @@ public interface AccountsDates {
      */
     public LocalDate convertStringToDate(String stringDate);
     
+    /**
+     * 
+     * Takes a {@link String} in isodate time/date format and converts it to a Java 8 {@link LocalDate}
+     * 
+     * @param dateTimeString
+     * @return
+     * 
+     */
+    public LocalDate getLocalDatefromDateTimeString(String dateTimeString);
+    
     
     /**
      * Takes a Java 8 {@link LocalDate} and converts it to a {@link String}
