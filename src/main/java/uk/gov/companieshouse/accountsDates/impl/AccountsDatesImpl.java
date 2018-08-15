@@ -117,13 +117,7 @@ public class AccountsDatesImpl implements AccountsDates {
      */
     public String generateBalanceSheetHeading(String periodStartString, String periodEndString, boolean isSameYear) {
 
-        Instant instantPeriodStart = Instant.parse(periodStartString);
-        Instant instantPeriodEnd = Instant.parse(periodEndString);
-        
-        LocalDate localDatePeriodStart = LocalDateTime.ofInstant(instantPeriodStart, ZoneId.of(ZoneOffset.UTC.getId())).toLocalDate();
-        LocalDate localDatePeriodEnd = LocalDateTime.ofInstant(instantPeriodEnd, ZoneId.of(ZoneOffset.UTC.getId())).toLocalDate();
-
-        Map<String, String> resultDates = calculatePeriodRange(localDatePeriodStart, localDatePeriodEnd, isSameYear);
+        Map<String, String> resultDates = calculatePeriodRange(convertStringToDate(periodStartString), convertStringToDate(periodEndString), isSameYear);
 
         if (!resultDates.containsKey(PERIOD_START)) {
             return resultDates.get(PERIOD_END);
