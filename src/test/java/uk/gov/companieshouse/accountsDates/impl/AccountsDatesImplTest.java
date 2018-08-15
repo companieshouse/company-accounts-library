@@ -53,6 +53,15 @@ public class AccountsDatesImplTest {
 		assertEquals("27 February 2015", date);
 
 	}
+	
+	@Test
+	public void getLocalDateFromDateAndTime() {
+	    String dateString = "2017-12-31T18:15:00.000Z";
+	    LocalDate testDate = LocalDate.parse("2017-12-31");
+	    LocalDate date = datesHelper.getLocalDatefromDateTimeString(dateString);
+	    assertEquals(testDate, date);	    
+	    
+	}
 
 	@Test
 	public void getDateAndTime() {

@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 import uk.gov.companieshouse.accountsDates.AccountsDates;
 
 public class AccountsDatesImpl implements AccountsDates {
@@ -25,7 +26,7 @@ public class AccountsDatesImpl implements AccountsDates {
 
     /**
      * 
-     * Takes a {@link String} and converts it to a Java 8 {@link LocalDate}
+     * Takes a {@link String} date in format yyyy-MM-dd and converts it to a Java 8 {@link LocalDate}
      * 
      * @param stringDate
      * @return
@@ -33,7 +34,23 @@ public class AccountsDatesImpl implements AccountsDates {
      */
     public LocalDate convertStringToDate(String stringDate) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT_YYYYMMDD);
+        
         return LocalDate.parse(stringDate, formatter);
+    }
+    
+    /**
+     * Returns a Java 8 {@link LocalDate} from given date/time string
+     * 
+     * @param dateTimeString
+     * @return
+     * 
+     */
+    public LocalDate getLocalDatefromDateTimeString(String dateTimeString) {
+
+        Instant instant = Instant.parse(dateTimeString);
+        LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, ZoneId.of(ZoneOffset.UTC.getId()));
+
+        return localDateTime.toLocalDate();
     }
 
     /**
