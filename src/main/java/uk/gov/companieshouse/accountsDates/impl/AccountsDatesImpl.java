@@ -25,12 +25,10 @@ public class AccountsDatesImpl implements AccountsDates {
     private static final String DATE_FORMAT_D_MMMM_YYYY = "d MMMM yyyy";
 
     /**
-     * 
      * Takes a {@link String} date in format yyyy-MM-dd and converts it to a Java 8 {@link LocalDate}
      * 
      * @param stringDate
      * @return
-     * 
      */
     @Override
     public LocalDate convertStringToDate(String stringDate) {
@@ -40,11 +38,10 @@ public class AccountsDatesImpl implements AccountsDates {
     }
     
     /**
-     * Returns a Java 8 {@link LocalDate} from given date/time string
+     * Takes a {@link String} in "yyyy-MM-dd'T'HH:mm:ss.SSSZ" format and converts it to a Java 8 {@link LocalDate}
      * 
      * @param dateTimeString
-     * @return
-     * 
+     * @return 
      */
     @Override
     public LocalDate getLocalDatefromDateTimeString(String dateTimeString) {
@@ -55,7 +52,7 @@ public class AccountsDatesImpl implements AccountsDates {
     }
 
     /**
-     * Takes a Java 8 {@link LocalDate} and converts it to a {@link String}
+     * Takes a Java 8 {@link LocalDate} and converts it to a {@link String} in format yyyy-MM-dd
      * 
      * @param date
      * @return
@@ -81,11 +78,10 @@ public class AccountsDatesImpl implements AccountsDates {
     }
 
     /**
-     * Returns a date and time object from given date/time string in the format 'D_MMMM_YYYY' 'h:mm a'
+     * Returns a date and time object in the format 'D_MMMM_YYYY' 'h:mm a' from given "yyyy-MM-dd'T'HH:mm:ss.SSSZ" date/time string
      * 
      * @param dateString
      * @return
-     * 
      */
     @Override
     public Map<String, String> getDateAndTime(String dateString) {
@@ -109,7 +105,6 @@ public class AccountsDatesImpl implements AccountsDates {
     }
 
     /**
-     * 
      * Generate balance sheet header string to display on web and ixbrl templates based on period start and end
      * dates
      * 
@@ -117,7 +112,6 @@ public class AccountsDatesImpl implements AccountsDates {
      * @param periodEndString accounting period end date 
      * @param isSameYear
      * @return
-     * 
      */
     @Override
     public String generateBalanceSheetHeading(String periodStartString, String periodEndString, boolean isSameYear) {
@@ -133,14 +127,11 @@ public class AccountsDatesImpl implements AccountsDates {
 
     /**
      *Calculate balance sheet dates display format depending on range between period start and end dates
-     * 
-     * 
+     *
      * @param periodStart accounting period start date
      * @param periodEnd accounting period end date 
      * @param isSameYear
      * @return
-     * 
-     * 
      */
     @Override
     public Map<String, String> calculatePeriodRange(LocalDate periodStart, LocalDate periodEnd, boolean isSameYear) {
@@ -198,7 +189,6 @@ public class AccountsDatesImpl implements AccountsDates {
     }
 
     /**
-     * 
      * Returns true if given Java 8 {@link LocalDate} dates are in the same calendar year
      * 
      * @param date1
@@ -259,8 +249,7 @@ public class AccountsDatesImpl implements AccountsDates {
             }
             futureDays.add(nextDate);
         }
-
+        
         return futureDays;
     }
-
 }
