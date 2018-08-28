@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>uk.gov.companieshouse</groupId>
@@ -6,6 +7,13 @@
   <version>unversioned</version>
   <packaging>jar</packaging>
   <name>company-accounts-library</name>
+
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.0.4.RELEASE</version>
+    <relativePath /> <!-- lookup parent from repository -->
+  </parent>
 
   <properties>
     <!-- Encoding -->
@@ -31,7 +39,7 @@
     <!-- Repositories -->
     <artifactoryResolveSnapshotRepo>libs-snapshot-local</artifactoryResolveSnapshotRepo>
     <artifactoryResolveReleaseRepo>libs-release-local</artifactoryResolveReleaseRepo>
-    
+
     <!-- Sonar -->
     <sonar-maven-plugin.version>3.4.0.905</sonar-maven-plugin.version>
     <sonar.host.url>${CODE_ANALYSIS_HOST_URL}</sonar.host.url>
@@ -63,6 +71,10 @@
       <groupId>uk.gov.companieshouse</groupId>
       <artifactId>structured-logging</artifactId>
       <version>${structured-logging.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
 
     <!-- Test -->
@@ -132,16 +144,16 @@
         </configuration>
       </plugin>
       <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-surefire-plugin</artifactId>
-          <version>${maven-surefire-plugin.version}</version>
-          <dependencies>
-              <dependency>
-                  <groupId>org.junit.platform</groupId>
-                  <artifactId>junit-platform-surefire-provider</artifactId>
-                  <version>${junit-platform-surefire-provider.version}</version>
-              </dependency>
-          </dependencies>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>${maven-surefire-plugin.version}</version>
+        <dependencies>
+          <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-surefire-provider</artifactId>
+            <version>${junit-platform-surefire-provider.version}</version>
+          </dependency>
+        </dependencies>
       </plugin>
       <plugin>
         <groupId>org.jacoco</groupId>
@@ -177,4 +189,3 @@
     </repository>
   </repositories>
 </project>
-    

@@ -1,4 +1,4 @@
-package uk.gov.companieshouse.accountsDates;
+package uk.gov.companieshouse.accountsDates.impl;
 
 import java.text.ParseException;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
@@ -15,16 +16,16 @@ import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
-import uk.gov.companieshouse.accountsDates.AccountsDates;
+import uk.gov.companieshouse.accountsDates.impl.AccountsDatesImpl;
 
-public class AccountsDatesTest {
+public class AccountsDatesImplTest {
 
 	private static final String YYYY_MM_DD = "yyyy-MM-dd";
 	private static final String PERIOD_START = "periodStart";
 	private static final String PERIOD_END = "periodEnd";
 
 	private SimpleDateFormat simpleDateFormat;
-	private AccountsDates datesHelper = new AccountsDates();
+	private AccountsDatesImpl datesHelper = new AccountsDatesImpl();
 
 	@Test
 	public void convertStringtoDate() throws ParseException {
@@ -53,17 +54,28 @@ public class AccountsDatesTest {
 		assertEquals("27 February 2015", date);
 
 	}
+	
+	@Test
+	public void getLocalDateFromDateAndTime() {
+	    String dateString = "2017-12-31T18:15:00.000Z";
+	    ZoneId z = ZoneId.of("Z");
+	    LocalDate testDate = LocalDate.parse("2017-12-31");
+	    LocalDate date = datesHelper.getLocalDatefromDateTimeString(dateString, z);
+	    assertEquals(testDate, date);	    
+	    
+	}
 
 	@Test
 	public void getDateAndTime() {
 
 		String dateString = "2017-12-31T18:15:00.000Z";
-		Map dateMap = datesHelper.getDateAndTime(dateString);
+		ZoneId z = ZoneId.of("Z");
+		Map dateMap = datesHelper.getDateAndTime(dateString, z);
 		assertEquals("31 December 2017", dateMap.get("date"));
 		assertEquals("6:15 pm", dateMap.get("time"));
 
 		dateString = "2016-12-02T03:15:22Z";
-		dateMap = datesHelper.getDateAndTime(dateString);
+		dateMap = datesHelper.getDateAndTime(dateString, z);
 		assertEquals("2 December 2016", dateMap.get("date"));
 		assertEquals("3:15 am", dateMap.get("time"));
 
@@ -240,36 +252,36 @@ public class AccountsDatesTest {
 
 		// test yyyy returned for 12 month period
 		assertEquals("2017",
-				datesHelper.generateBalanceSheetHeading("2016-01-01T00:00:00.000Z", "2017-01-14T00:00:00.000Z", false));
+				datesHelper.generateBalanceSheetHeading("2016-01-01", "2017-01-14", false));
 
 		// Test 381 days shows month (more than 12 month period)
 		assertEquals("13 months to 16 February 2016",
-				datesHelper.generateBalanceSheetHeading("2015-02-01T00:00:00.000Z", "2016-02-16T00:00:00.000Z", false));
+				datesHelper.generateBalanceSheetHeading("2015-02-01", "2016-02-16", false));
 
 		// Test 349 days shows month (less than 12 month period)
 		assertEquals("11 months to 1 January 2017",
-				datesHelper.generateBalanceSheetHeading("2016-01-19T00:00:00.000Z", "2017-01-01T00:00:00.000Z", false));
+				datesHelper.generateBalanceSheetHeading("2016-01-19", "2017-01-01", false));
 
 		// Test exactly 381 days shows months leap year
 		assertEquals("13 months to 16 February 2015",
-				datesHelper.generateBalanceSheetHeading("2014-02-01T00:00:00.000Z", "2015-02-16T00:00:00.000Z", false));
+				datesHelper.generateBalanceSheetHeading("2014-02-01", "2015-02-16", false));
 		
 		// Test 336 days shows 'month' rather than 'months'
 		assertEquals("1 month to 1 April 2015",
-				datesHelper.generateBalanceSheetHeading("2015-03-07T00:00:00.000Z", "2015-04-01T00:00:00.000Z", false));
+				datesHelper.generateBalanceSheetHeading("2015-03-07", "2015-04-01", false));
 
 		// "Test exactly 351 days show yyyy"
 		assertEquals("2015",
-				datesHelper.generateBalanceSheetHeading("2014-04-01T00:00:00.000Z", "2015-03-16T00:00:00.000Z", false));
+				datesHelper.generateBalanceSheetHeading("2014-04-01", "2015-03-16", false));
 		
 		// Test exactly 351 days show years leap year
 		assertEquals("2016",
-				datesHelper.generateBalanceSheetHeading("2015-04-01T00:00:00.000Z", "2016-03-16T00:00:00.000Z", false));
+				datesHelper.generateBalanceSheetHeading("2015-04-01", "2016-03-16", false));
 
 		// Test 1st year filing within 15 days either side of 1 year period with same
 		// year is just year
 		assertEquals("30 June 2015",
-				datesHelper.generateBalanceSheetHeading("2014-06-01T00:00:00.000Z", "2015-06-30T00:00:00.000Z", true));
+				datesHelper.generateBalanceSheetHeading("2014-06-01", "2015-06-30", true));
 
 	}
 }
