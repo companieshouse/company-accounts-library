@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
@@ -57,8 +58,9 @@ public class AccountsDatesImplTest {
 	@Test
 	public void getLocalDateFromDateAndTime() {
 	    String dateString = "2017-12-31T18:15:00.000Z";
+	    ZoneId z = ZoneId.of("Z");
 	    LocalDate testDate = LocalDate.parse("2017-12-31");
-	    LocalDate date = datesHelper.getLocalDatefromDateTimeString(dateString);
+	    LocalDate date = datesHelper.getLocalDatefromDateTimeString(dateString, z);
 	    assertEquals(testDate, date);	    
 	    
 	}
@@ -67,12 +69,13 @@ public class AccountsDatesImplTest {
 	public void getDateAndTime() {
 
 		String dateString = "2017-12-31T18:15:00.000Z";
-		Map dateMap = datesHelper.getDateAndTime(dateString);
+		ZoneId z = ZoneId.of("Z");
+		Map dateMap = datesHelper.getDateAndTime(dateString, z);
 		assertEquals("31 December 2017", dateMap.get("date"));
 		assertEquals("6:15 pm", dateMap.get("time"));
 
 		dateString = "2016-12-02T03:15:22Z";
-		dateMap = datesHelper.getDateAndTime(dateString);
+		dateMap = datesHelper.getDateAndTime(dateString, z);
 		assertEquals("2 December 2016", dateMap.get("date"));
 		assertEquals("3:15 am", dateMap.get("time"));
 

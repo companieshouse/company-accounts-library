@@ -2,9 +2,11 @@ package uk.gov.companieshouse.accountsDates;
 
 import java.time.LocalDate;
 
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
 
 import org.springframework.stereotype.Service;
 
@@ -25,7 +27,7 @@ public interface AccountsDates {
      * @param dateTimeString
      * @return
      */
-    public LocalDate getLocalDatefromDateTimeString(String dateTimeString);
+    public LocalDate getLocalDatefromDateTimeString(String dateTimeString, ZoneId zoneId);
     
     
     /**
@@ -50,7 +52,7 @@ public interface AccountsDates {
      * @param dateString
      * @return
      */
-    public Map<String, String> getDateAndTime(String dateString);
+    public Map<String, String> getDateAndTime(String dateString, ZoneId zoneId);
 
     /**
      * Generate balance sheet header string to display on web and ixbrl templates based on period start and end

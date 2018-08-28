@@ -44,9 +44,9 @@ public class AccountsDatesImpl implements AccountsDates {
      * @return 
      */
     @Override
-    public LocalDate getLocalDatefromDateTimeString(String dateTimeString) {
+    public LocalDate getLocalDatefromDateTimeString(String dateTimeString, ZoneId zoneId) {
         Instant instant = Instant.parse(dateTimeString);
-        LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, ZoneId.of(ZoneOffset.UTC.getId()));
+        LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, ZoneId.of(zoneId.getId()));
 
         return localDateTime.toLocalDate();
     }
@@ -84,12 +84,12 @@ public class AccountsDatesImpl implements AccountsDates {
      * @return
      */
     @Override
-    public Map<String, String> getDateAndTime(String dateString) {
+    public Map<String, String> getDateAndTime(String dateString, ZoneId zoneId ) {
         Map<String, String> timeObject = new HashMap<>();
 
         Instant instant = Instant.parse(dateString);
 
-        LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, ZoneId.of(ZoneOffset.UTC.getId()));
+        LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, ZoneId.of(zoneId.getId()));
         LocalDate localDate = localDateTime.toLocalDate();
 
         DateTimeFormatter dateFormatDesired = DateTimeFormatter.ofPattern(DATE_FORMAT_D_MMMM_YYYY);
