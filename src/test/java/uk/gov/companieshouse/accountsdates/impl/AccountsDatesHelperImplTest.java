@@ -16,14 +16,14 @@ import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
-public class AccountsDatesImplTest {
+public class AccountsDatesHelperImplTest {
 
 	private static final String YYYY_MM_DD = "yyyy-MM-dd";
 	private static final String PERIOD_START = "periodStart";
 	private static final String PERIOD_END = "periodEnd";
 
 	private SimpleDateFormat simpleDateFormat;
-	private AccountsDatesImpl datesHelper = new AccountsDatesImpl();
+	private AccountsDatesHelperImpl datesHelper = new AccountsDatesHelperImpl();
 
 	@Test
 	public void convertStringtoDate() throws ParseException {
