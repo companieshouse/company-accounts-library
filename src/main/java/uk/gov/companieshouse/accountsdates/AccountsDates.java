@@ -1,4 +1,4 @@
-package uk.gov.companieshouse.accountsDates;
+package uk.gov.companieshouse.accountsdates;
 
 import java.time.LocalDate;
 
@@ -6,7 +6,6 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.TimeZone;
 
 import org.springframework.stereotype.Service;
 

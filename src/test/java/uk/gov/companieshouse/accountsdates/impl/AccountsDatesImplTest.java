@@ -1,4 +1,4 @@
-package uk.gov.companieshouse.accountsDates.impl;
+package uk.gov.companieshouse.accountsdates.impl;
 
 import java.text.ParseException;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -15,8 +15,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.junit.jupiter.api.Test;
-
-import uk.gov.companieshouse.accountsDates.impl.AccountsDatesImpl;
 
 public class AccountsDatesImplTest {
 
