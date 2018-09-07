@@ -1,11 +1,10 @@
-package uk.gov.companieshouse.accountsDates.impl;
+package uk.gov.companieshouse.accountsdates.impl;
 
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
 import java.time.ZoneId;
-import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -15,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 
-import uk.gov.companieshouse.accountsDates.AccountsDates;
+import uk.gov.companieshouse.accountsdates.AccountsDates;
 
 public class AccountsDatesImpl implements AccountsDates {
 
