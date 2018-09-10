@@ -14,9 +14,9 @@ import java.util.List;
 import java.util.Map;
 
 
-import uk.gov.companieshouse.accountsdates.AccountsDates;
+import uk.gov.companieshouse.accountsdates.AccountsDatesHelper;
 
-public class AccountsDatesImpl implements AccountsDates {
+public class AccountsDatesHelperImpl implements AccountsDatesHelper {
 
     private static final String PERIOD_START = "periodStart";
     private static final String PERIOD_END = "periodEnd";
@@ -116,6 +116,27 @@ public class AccountsDatesImpl implements AccountsDates {
     public String generateBalanceSheetHeading(String periodStartString, String periodEndString, boolean isSameYear) {
 
         Map<String, String> resultDates = calculatePeriodRange(convertStringToDate(periodStartString), convertStringToDate(periodEndString), isSameYear);
+
+        return generateBalanceSheetHeading(resultDates);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String generateBalanceSheetHeading(LocalDate periodStart, LocalDate periodEnd, boolean isSameYear) {
+
+        Map<String, String> resultDates = calculatePeriodRange(periodStart, periodEnd, isSameYear);
+
+        return generateBalanceSheetHeading(resultDates);
+    }
+
+    /**
+     * Generate balance sheet heading for a given calculated period date range
+     * @param resultDates calculated period date range
+     * @return balance sheet heading
+     */
+    private String generateBalanceSheetHeading(Map<String, String> resultDates) {
 
         if (!resultDates.containsKey(PERIOD_START)) {
             return resultDates.get(PERIOD_END);

@@ -10,7 +10,7 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 
 @Service
-public interface AccountsDates {
+public interface AccountsDatesHelper {
     
     /**
      * Takes a {@link String} and converts it to a Java 8 {@link LocalDate}
@@ -63,6 +63,17 @@ public interface AccountsDates {
      * @return
      */
     public String generateBalanceSheetHeading(String periodStartString, String periodEndString, boolean isSameYear);
+
+    /**
+     * Generate balance sheet header string to display on web and ixbrl templates based on period start and end
+     * dates
+     *
+     * @param periodStart accounting period start date
+     * @param periodEnd accounting period end date
+     * @param isSameYear
+     * @return
+     */
+    public String generateBalanceSheetHeading(LocalDate periodStart, LocalDate periodEnd, boolean isSameYear);
 
     /**
      *Calculate balance sheet dates display format depending on range between period start and end dates

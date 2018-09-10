@@ -16,14 +16,14 @@ import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
-public class AccountsDatesImplTest {
+public class AccountsDatesHelperImplTest {
 
 	private static final String YYYY_MM_DD = "yyyy-MM-dd";
 	private static final String PERIOD_START = "periodStart";
 	private static final String PERIOD_END = "periodEnd";
 
 	private SimpleDateFormat simpleDateFormat;
-	private AccountsDatesImpl datesHelper = new AccountsDatesImpl();
+	private AccountsDatesHelperImpl datesHelper = new AccountsDatesHelperImpl();
 
 	@Test
 	public void convertStringtoDate() throws ParseException {
@@ -281,5 +281,42 @@ public class AccountsDatesImplTest {
 		assertEquals("30 June 2015",
 				datesHelper.generateBalanceSheetHeading("2014-06-01", "2015-06-30", true));
 
+	}
+
+	@Test
+	public void generateBalanceSheetHeadingWithLocalDate() {
+
+		// test yyyy returned for 12 month period
+		assertEquals("2017",
+				datesHelper.generateBalanceSheetHeading(LocalDate.parse("2016-01-01"), LocalDate.parse("2017-01-14"), false));
+
+		// Test 381 days shows month (more than 12 month period)
+		assertEquals("13 months to 16 February 2016",
+				datesHelper.generateBalanceSheetHeading(LocalDate.parse("2015-02-01"), LocalDate.parse("2016-02-16"), false));
+
+		// Test 349 days shows month (less than 12 month period)
+		assertEquals("11 months to 1 January 2017",
+				datesHelper.generateBalanceSheetHeading(LocalDate.parse("2016-01-19"), LocalDate.parse("2017-01-01"), false));
+
+		// Test exactly 381 days shows months leap year
+		assertEquals("13 months to 16 February 2015",
+				datesHelper.generateBalanceSheetHeading(LocalDate.parse("2014-02-01"), LocalDate.parse("2015-02-16"), false));
+
+		// Test 336 days shows 'month' rather than 'months'
+		assertEquals("1 month to 1 April 2015",
+				datesHelper.generateBalanceSheetHeading(LocalDate.parse("2015-03-07"), LocalDate.parse("2015-04-01"), false));
+
+		// "Test exactly 351 days show yyyy"
+		assertEquals("2015",
+				datesHelper.generateBalanceSheetHeading(LocalDate.parse("2014-04-01"), LocalDate.parse("2015-03-16"), false));
+
+		// Test exactly 351 days show years leap year
+		assertEquals("2016",
+				datesHelper.generateBalanceSheetHeading(LocalDate.parse("2015-04-01"), LocalDate.parse("2016-03-16"), false));
+
+		// Test 1st year filing within 15 days either side of 1 year period with same
+		// year is just year
+		assertEquals("30 June 2015",
+				datesHelper.generateBalanceSheetHeading(LocalDate.parse("2014-06-01"), LocalDate.parse("2015-06-30"), true));
 	}
 }
