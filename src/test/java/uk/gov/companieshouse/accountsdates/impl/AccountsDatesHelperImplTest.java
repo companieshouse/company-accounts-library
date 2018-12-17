@@ -306,6 +306,10 @@ public class AccountsDatesHelperImplTest {
 		assertEquals("1 month to 1 April 2015",
 				datesHelper.generateBalanceSheetHeading(LocalDate.parse("2015-03-07"), LocalDate.parse("2015-04-01"), false));
 
+		// Test 336 days shows 'month' rather than 'months'  newwwwww testtttt
+		assertEquals("1 month to 31 March 2010",
+			datesHelper.generateBalanceSheetHeading(LocalDate.parse("2010-03-18"), LocalDate.parse("2010-03-31"), false));
+
 		// "Test exactly 351 days show yyyy"
 		assertEquals("2015",
 				datesHelper.generateBalanceSheetHeading(LocalDate.parse("2014-04-01"), LocalDate.parse("2015-03-16"), false));

@@ -169,14 +169,6 @@ public class AccountsDatesHelperImpl implements AccountsDatesHelper {
 
         long totalDaysDiff = ChronoUnit.DAYS.between(periodStart, periodEnd) + 1; // + 1 as they have time till the end
                                                                                   // of the day
-        long totalMonthsDiff = ChronoUnit.MONTHS.between(periodStart, periodEnd);
-
-        // If the days over an exact month are 1 to 15, then round down (unless
-        // the period is less than 1 month, in which case round up).
-        // If the days over are 16 to 31, then round up. e.g. 15 months and 4 days is
-        // shown as 15 months; 15 months and 21 days is shown as 16 months.
-        totalMonthsDiff = (accountsPeriod.getDays() >= 15) ? totalMonthsDiff + 1 : totalMonthsDiff; // + 1 to days to
-                                                                                                    // include end date
 
         // If the previous and current periods both end in the same year, then the
         // heading is output as a full date e.g. ‘5 January 2015’ ’31 December 2015’.
@@ -200,6 +192,19 @@ public class AccountsDatesHelperImpl implements AccountsDatesHelper {
         // Then the heading for the balance sheet figures is 'x' months to dd/mm/yyyy
         // e.g. 15 months to 31/12/2016
         else {
+            long totalMonthsDiff = ChronoUnit.MONTHS.between(periodStart, periodEnd);
+
+            // If the days over an exact month are 1 to 15, then round down (unless
+            // the period is less than 1 month, in which case round up).
+            // If the days over are 16 to 31, then round up. e.g. 15 months and 4 days is
+            // shown as 15 months; 15 months and 21 days is shown as 16 months.
+            totalMonthsDiff = (accountsPeriod.getDays() >= 15) ? totalMonthsDiff + 1 : totalMonthsDiff; // + 1 to days to
+                                                                                                        // include end date
+            // If total months is equal to zero set it to one to prevent '0 months' displaying
+            if (totalMonthsDiff == 0L) {
+                totalMonthsDiff = 1L;
+            }
+
             String monthsDiffString = (totalMonthsDiff == 1) ? " month" : " months";
             periodObject.put(PERIOD_START, totalMonthsDiff + monthsDiffString);
             periodObject.put(PERIOD_END, convertLocalDateToDisplayDate(periodEnd));
