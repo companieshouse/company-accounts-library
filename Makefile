@@ -6,39 +6,39 @@ all: build
 
 .PHONY: clean
 clean:
-    mvn clean
+	mvn clean
 
 .PHONY: build
 build:
-    mvn compile
+	mvn compile
 
 .PHONY: test
 test: test-unit
 
 .PHONY: test-unit
 test-unit: clean
-    mvn test
+	mvn test
 
 .PHONY: package
 package:
 ifndef version
-    $(error No version given. Aborting)
+	$(error No version given. Aborting)
 endif
-    $(info Packaging version: $(version))
-    mvn versions:set -DnewVersion=$(version) -DgenerateBackupPoms=false
-    mvn package -DskipTests=true
+	$(info Packaging version: $(version))
+	mvn versions:set -DnewVersion=$(version) -DgenerateBackupPoms=false
+	mvn package -DskipTests=true
 
 .PHONY: dist
 dist: clean package
 
 .PHONY: publish
 publish:
-    mvn jar:jar deploy:deploy
+	mvn jar:jar deploy:deploy
 
 .PHONY: sonar
 sonar:
-    mvn sonar:sonar
+	mvn sonar:sonar
 
 .PHONY: sonar-pr-analysis
 sonar-pr-analysis:
-    mvn sonar:sonar -P sonar-pr-analysis
+	mvn sonar:sonar -P sonar-pr-analysis
