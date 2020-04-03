@@ -2,16 +2,15 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>uk.gov.companieshouse</groupId>
   <artifactId>company-accounts-library</artifactId>
   <version>unversioned</version>
   <packaging>jar</packaging>
   <name>company-accounts-library</name>
 
   <parent>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.0.4.RELEASE</version>
+    <groupId>uk.gov.companieshouse</groupId>
+    <artifactId>companies-house-spring-boot-parent</artifactId>
+    <version>1.2.0</version>
     <relativePath /> <!-- lookup parent from repository -->
   </parent>
 
@@ -20,8 +19,6 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
     <!-- Dependency Versions -->
-    <commons-codec-version>1.9</commons-codec-version>
-    <commons-io.version>2.4</commons-io.version>
     <jacoco-maven-plugin.version>0.7.7.201606060606</jacoco-maven-plugin.version>
     <maven-compiler-plugin.version>3.5.1</maven-compiler-plugin.version>
     <maven-surefire-plugin.version>2.21.0</maven-surefire-plugin.version>
@@ -29,9 +26,6 @@
     <api-security-java.version>0.2.9</api-security-java.version>
 
     <!-- JUnit testing -->
-    <junit-jupiter-engine.version>5.2.0</junit-jupiter-engine.version>
-    <junit-jupiter-api.version>5.1.0</junit-jupiter-api.version>
-    <mockito-junit-jupiter.version>2.18.0</mockito-junit-jupiter.version>
     <junit-platform-surefire-provider.version>1.2.0</junit-platform-surefire-provider.version>
 
     <!-- JDK -->
@@ -42,41 +36,25 @@
     <artifactoryResolveSnapshotRepo>libs-snapshot-local</artifactoryResolveSnapshotRepo>
     <artifactoryResolveReleaseRepo>virtual-release</artifactoryResolveReleaseRepo>
 
-    <!-- Sonar -->
-    <sonar-maven-plugin.version>3.4.0.905</sonar-maven-plugin.version>
-    <sonar.host.url>${CODE_ANALYSIS_HOST_URL}</sonar.host.url>
-    <sonar.login>${CODE_ANALYSIS_LOGIN}</sonar.login>
-    <sonar.password>${CODE_ANALYSIS_PASSWORD}</sonar.password>
-
-    <structured-logging.version>1.2.0-rc1</structured-logging.version>
-
   </properties>
 
   <dependencies>
     <!-- Compile -->
     <dependency>
-      <groupId>commons-codec</groupId>
-      <artifactId>commons-codec</artifactId>
-      <version>${commons-codec-version}</version>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
-    <dependency>
-      <groupId>commons-io</groupId>
-      <artifactId>commons-io</artifactId>
-      <version>${commons-io.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.sonarsource.scanner.maven</groupId>
-      <artifactId>sonar-maven-plugin</artifactId>
-      <version>${sonar-maven-plugin.version}</version>
-    </dependency>
+
     <dependency>
       <groupId>uk.gov.companieshouse</groupId>
       <artifactId>structured-logging</artifactId>
       <version>${structured-logging.version}</version>
     </dependency>
+
     <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-web</artifactId>
+      <groupId>org.sonarsource.scanner.maven</groupId>
+      <artifactId>sonar-maven-plugin</artifactId>
+      <version>${sonar-maven-plugin.version}</version>
     </dependency>
 
     <dependency>
@@ -89,19 +67,11 @@
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-engine</artifactId>
-      <version>${junit-jupiter-engine.version}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-api</artifactId>
-      <version>${junit-jupiter-api.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-junit-jupiter</artifactId>
-      <version>${mockito-junit-jupiter.version}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
