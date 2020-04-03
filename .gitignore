@@ -1,14 +1,18 @@
-# IntelliJ files
-.idea
-*.iml
- # Eclipse files
+# Build artifacts
+target/
+*.jar
+*.zip
+
+# Eclipse files
 .classpath
 .project
 .settings
-/bin/
- company-accounts-library.jar
- # Avoid ignoring Maven wrapper jar file (.jar files are usually ignored)
-!/.mvn/wrapper/maven-wrapper.jar
-/target/
+bin/
 
-company-accounts-library.jar
+# IntelliJ files
+.idea/
+*.iml
+
+# Mac files
+.DS_Store
+._*
