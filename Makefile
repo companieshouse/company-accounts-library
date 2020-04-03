@@ -1,7 +1,5 @@
-commit  := $(shell git rev-parse --short HEAD)
-tag     := $(shell git tag -l 'v*-rc*' --points-at HEAD)
-version := $(shell if [[ -n "$(tag)" ]]; then echo $(tag) | sed 's/^v//'; else echo $(commit); fi)
-artifactory_publish := $(shell if [[ -n "$(tag)" ]]; then echo release; else echo dev; fi)
+artifact_name   := company-accounts-library
+version         := "unversioned"
 
 .PHONY: all
 all: build
@@ -23,6 +21,10 @@ test-unit: clean
 
 .PHONY: package
 package:
+ifndef version
+	$(error No version given. Aborting)
+endif
+	$(info Packaging version: $(version))
 	mvn versions:set -DnewVersion=$(version) -DgenerateBackupPoms=false
 	mvn package -DskipTests=true
 
@@ -31,8 +33,12 @@ dist: clean package
 
 .PHONY: publish
 publish:
-	mvn jar:jar deploy:deploy -DpublishRepo=$(artifactory_publish)
+	mvn jar:jar deploy:deploy
 
 .PHONY: sonar
 sonar:
 	mvn sonar:sonar
+
+.PHONY: sonar-pr-analysis
+sonar-pr-analysis:
+	mvn sonar:sonar -P sonar-pr-analysis
