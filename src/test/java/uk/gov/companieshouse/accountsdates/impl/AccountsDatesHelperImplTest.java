@@ -68,7 +68,7 @@ public class AccountsDatesHelperImplTest {
 
 		String dateString = "2017-12-31T18:15:00.000Z";
 		ZoneId z = ZoneId.of("Z");
-		Map dateMap = datesHelper.getDateAndTime(dateString, z);
+		Map<String, String> dateMap = datesHelper.getDateAndTime(dateString, z);
 		assertEquals("31 December 2017", dateMap.get("date"));
 		assertEquals("6:15 pm", dateMap.get("time"));
 
