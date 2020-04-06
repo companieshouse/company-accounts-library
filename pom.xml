@@ -32,10 +32,6 @@
     <source-level>1.8</source-level>
     <target-level>1.8</target-level>
 
-    <!-- Repositories -->
-    <artifactoryResolveSnapshotRepo>libs-snapshot-local</artifactoryResolveSnapshotRepo>
-    <artifactoryResolveReleaseRepo>virtual-release</artifactoryResolveReleaseRepo>
-
   </properties>
 
   <dependencies>
@@ -75,45 +71,6 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
-
-  <profiles>
-    <profile>
-      <id>release-publish</id>
-      <activation>
-        <property>
-          <name>publishRepo</name>
-          <value>release</value>
-        </property>
-      </activation>
-      <properties>
-        <artifactoryReleasePublishRepo>libs-release-local</artifactoryReleasePublishRepo>
-      </properties>
-      <distributionManagement>
-        <repository>
-          <id>ch-artifactory</id>
-          <url>${MAVEN_REPOSITORY_URL}/${artifactoryReleasePublishRepo}</url>
-        </repository>
-      </distributionManagement>
-    </profile>
-    <profile>
-      <id>dev-publish</id>
-      <activation>
-        <property>
-          <name>publishRepo</name>
-          <value>dev</value>
-        </property>
-      </activation>
-      <properties>
-        <artifactoryDevPublishRepo>libs-snapshot-local</artifactoryDevPublishRepo>
-      </properties>
-      <distributionManagement>
-        <repository>
-          <id>ch-artifactory</id>
-          <url>${MAVEN_REPOSITORY_URL}/${artifactoryDevPublishRepo}</url>
-        </repository>
-      </distributionManagement>
-    </profile>
-  </profiles>
 
   <build>
     <plugins>
@@ -161,14 +118,4 @@
     </plugins>
   </build>
 
-  <repositories>
-    <repository>
-      <id>ch-artifactory-snapshot</id>
-      <url>${MAVEN_REPOSITORY_URL}/${artifactoryResolveSnapshotRepo}</url>
-    </repository>
-    <repository>
-      <id>ch-artifactory-release</id>
-      <url>${MAVEN_REPOSITORY_URL}/${artifactoryResolveReleaseRepo}</url>
-    </repository>
-  </repositories>
 </project>
