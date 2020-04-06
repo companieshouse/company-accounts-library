@@ -73,7 +73,6 @@
   </dependencies>
 
   <build>
-    <finalName>company-accounts-library</finalName>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
