@@ -21,7 +21,7 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
     private static final Logger LOGGER = LoggerFactory.getLogger("company-accounts-library");
 
     /**
-     * Pre handle method to authorize the request before it reaches the controller.
+     * Pre handle method to authorise the request before it reaches the controller.
      * Retrieves the TokenPermissions stored in the request (which must have been
      * previously added by the TokenPermissionsInterceptor) and checks the relevant
      * permissions
