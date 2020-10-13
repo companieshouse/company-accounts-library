@@ -16,7 +16,7 @@ import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
-public class AccountsDatesHelperImplTest {
+class AccountsDatesHelperImplTest {
 
     private static final String YYYY_MM_DD = "yyyy-MM-dd";
     private static final String PERIOD_START = "periodStart";
@@ -26,7 +26,7 @@ public class AccountsDatesHelperImplTest {
     private AccountsDatesHelperImpl datesHelper = new AccountsDatesHelperImpl();
 
     @Test
-    public void convertStringtoDate() throws ParseException {
+    void convertStringtoDate() throws ParseException {
 
         LocalDate testDate = LocalDate.parse("2017-03-05");
         LocalDate date = datesHelper.convertStringToDate("2017-03-05");
@@ -40,7 +40,7 @@ public class AccountsDatesHelperImplTest {
     }
 
     @Test
-    public void convertLocalDatetoDisplayDate() {
+    void convertLocalDatetoDisplayDate() {
 
         String date = datesHelper.convertLocalDateToDisplayDate(LocalDate.parse("2017-03-05"));
         assertEquals("5 March 2017", date);
@@ -54,7 +54,7 @@ public class AccountsDatesHelperImplTest {
     }
     
     @Test
-    public void getLocalDateFromDateAndTime() {
+    void getLocalDateFromDateAndTime() {
         String dateString = "2017-12-31T18:15:00.000Z";
         ZoneId z = ZoneId.of("Z");
         LocalDate testDate = LocalDate.parse("2017-12-31");
@@ -64,7 +64,7 @@ public class AccountsDatesHelperImplTest {
     }
 
     @Test
-    public void getDateAndTime() {
+    void getDateAndTime() {
 
         String dateString = "2017-12-31T18:15:00.000Z";
         ZoneId z = ZoneId.of("Z");
@@ -80,7 +80,7 @@ public class AccountsDatesHelperImplTest {
     }
 
     @Test
-    public void convertDatetoString() throws ParseException {
+    void convertDatetoString() throws ParseException {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(YYYY_MM_DD);
 
@@ -95,7 +95,7 @@ public class AccountsDatesHelperImplTest {
     }
 
     @Test
-    public void calculatePeriodRangeOver2Years() throws ParseException {
+    void calculatePeriodRangeOver2Years() throws ParseException {
 
         // Days difference over 2 years
         LocalDate testDateStart = LocalDate.parse("2013-03-07");
@@ -106,7 +106,7 @@ public class AccountsDatesHelperImplTest {
     }
 
     @Test
-    public void calculatePeriodRangeOver380() throws ParseException {
+    void calculatePeriodRangeOver380() throws ParseException {
 
         // Days difference over 380
         LocalDate testDateStart = LocalDate.parse("2015-03-07");
@@ -117,7 +117,7 @@ public class AccountsDatesHelperImplTest {
     }
 
     @Test
-    public void calculatePeriodRangeBelow350() throws ParseException {
+    void calculatePeriodRangeBelow350() throws ParseException {
 
         // Days difference below 350
         LocalDate testDateStart = LocalDate.parse("2016-08-03");
@@ -128,7 +128,7 @@ public class AccountsDatesHelperImplTest {
     }
 
     @Test
-    public void calculatePeriodLessThanOneMonth() throws ParseException {
+    void calculatePeriodLessThanOneMonth() throws ParseException {
 
         // Month difference less than one month
         LocalDate testDateStart = LocalDate.parse("2015-03-07");
@@ -139,7 +139,7 @@ public class AccountsDatesHelperImplTest {
     }
 
     @Test
-    public void calculatePeriodRangeBelow350RoundUp() throws ParseException {
+    void calculatePeriodRangeBelow350RoundUp() throws ParseException {
 
         // Days difference below 350 with month round up ( remaining days > 15 )
         LocalDate testDateStart = LocalDate.parse("2016-08-01");
@@ -150,7 +150,7 @@ public class AccountsDatesHelperImplTest {
     }
 
     @Test
-    public void calculatePeriodRangeSameYear() throws ParseException {
+    void calculatePeriodRangeSameYear() throws ParseException {
         // Same year
         LocalDate testDateEndLast = LocalDate.parse("2017-08-12");
         LocalDate testDateEndNext = LocalDate.parse("2017-11-23");
@@ -160,7 +160,7 @@ public class AccountsDatesHelperImplTest {
     }
 
     @Test
-    public void calculatePeriod12Months() throws ParseException {
+    void calculatePeriod12Months() throws ParseException {
         // 12 months acc period ( +/- 15 days )
         LocalDate testDateStart = LocalDate.parse("2016-08-12");
 
@@ -176,7 +176,7 @@ public class AccountsDatesHelperImplTest {
     }
 
     @Test
-    public void convertDateToLocalDate() throws ParseException {
+    void convertDateToLocalDate() throws ParseException {
 
         simpleDateFormat = new SimpleDateFormat(YYYY_MM_DD);
 
@@ -186,7 +186,7 @@ public class AccountsDatesHelperImplTest {
     }
 
     @Test
-    public void convertStringToLocalDate() {
+    void convertStringToLocalDate() {
 
         String date = "2017-03-05";
         LocalDate localDate = datesHelper.convertStringToDate(date);
@@ -194,7 +194,7 @@ public class AccountsDatesHelperImplTest {
     }
 
     @Test
-    public void getPreviousDays() {
+    void getPreviousDays() {
 
         int numDays = 3;
 
@@ -210,7 +210,7 @@ public class AccountsDatesHelperImplTest {
     }
 
     @Test
-    public void getFutureDays() {
+    void getFutureDays() {
 
         final int numDays = 7;
 
@@ -235,7 +235,7 @@ public class AccountsDatesHelperImplTest {
     }
 
     @Test
-    public void getFutureDatesLeapYear() {
+    void getFutureDatesLeapYear() {
 
         final LocalDate startDate = LocalDate.of(2016, 02, 26);
         final int numberOfDays = 7;
@@ -246,7 +246,7 @@ public class AccountsDatesHelperImplTest {
     }
 
     @Test
-    public void generateCorrectBalanceSheetHeader() {
+    void generateCorrectBalanceSheetHeader() {
 
         // test yyyy returned for 12 month period
         assertEquals("2017",
@@ -284,7 +284,7 @@ public class AccountsDatesHelperImplTest {
     }
 
     @Test
-    public void generateBalanceSheetHeadingWithLocalDate() {
+    void generateBalanceSheetHeadingWithLocalDate() {
 
         // test yyyy returned for 12 month period
         assertEquals("2017",
