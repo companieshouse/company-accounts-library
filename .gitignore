@@ -2,6 +2,7 @@
 target/
 *.jar
 *.zip
+build.log
 
 # Eclipse files
 .classpath
