@@ -23,7 +23,7 @@ import uk.gov.companieshouse.api.util.security.Permission.Value;
 import uk.gov.companieshouse.api.util.security.TokenPermissions;
 
 @ExtendWith(MockitoExtension.class)
-public class AuthenticationInterceptorTest {
+class AuthenticationInterceptorTest {
 
     @Spy
     private AuthenticationInterceptor interceptor;
