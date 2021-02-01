@@ -18,8 +18,10 @@ import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import uk.gov.companieshouse.api.util.security.EricConstants;
 import uk.gov.companieshouse.api.util.security.Permission.Key;
 import uk.gov.companieshouse.api.util.security.Permission.Value;
+import uk.gov.companieshouse.api.util.security.SecurityConstants;
 import uk.gov.companieshouse.api.util.security.TokenPermissions;
 
 @ExtendWith(MockitoExtension.class)
@@ -65,6 +67,13 @@ class AuthenticationInterceptorTest {
     @DisplayName("Test preHandle when TokenPermissions is not present in request")
     void preHandleMissingTokenPermissions() throws Exception {
         assertThrows(IllegalStateException.class, () -> interceptor.preHandle(request, response, handler));
+    }
+
+    @Test
+    @DisplayName("Test preHandle when request is authorized with an api key")
+    void preHandleAuthorizedAPIKey() throws Exception {
+        doReturn(SecurityConstants.API_KEY_IDENTITY_TYPE).when(request).getHeader(EricConstants.ERIC_IDENTITY_TYPE);
+        assertTrue(interceptor.preHandle(request, response, handler));
     }
 
     private void setupTokenPermissions() {

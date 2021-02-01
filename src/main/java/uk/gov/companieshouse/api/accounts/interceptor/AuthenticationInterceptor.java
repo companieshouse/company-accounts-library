@@ -12,6 +12,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import uk.gov.companieshouse.api.util.security.AuthorisationUtil;
 import uk.gov.companieshouse.api.util.security.Permission.Key;
 import uk.gov.companieshouse.api.util.security.Permission.Value;
+import uk.gov.companieshouse.api.util.security.SecurityConstants;
 import uk.gov.companieshouse.api.util.security.TokenPermissions;
 import uk.gov.companieshouse.logging.Logger;
 import uk.gov.companieshouse.logging.LoggerFactory;
@@ -29,6 +30,13 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
+
+        // skip token permission checks if an api key is used, api key elevated privileges are checked in other interceptors
+        // inside company accounts and abridged accounts api services
+        if (SecurityConstants.API_KEY_IDENTITY_TYPE.equals(AuthorisationUtil.getAuthorisedIdentityType(request))) {
+            LOGGER.debugRequest(request, "AuthenticationInterceptor skipping token permission checks for api key request", new HashMap<>());
+            return true;
+        }
 
         // TokenPermissions should have been set up in the request by TokenPermissionsInterceptor
         final TokenPermissions tokenPermissions = getTokenPermissions(request)
