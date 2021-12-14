@@ -21,6 +21,7 @@
     <!-- Dependency Versions -->
     <structured-logging.version>1.2.0-rc1</structured-logging.version>
     <log4j2.version>2.15.0</log4j2.version>
+    <javax.servlet.version>4.0.1</javax.servlet.version>
     <api-security-java.version>0.3.4</api-security-java.version>
 
     <spring-boot-dependencies.version>2.1.3.RELEASE</spring-boot-dependencies.version>
@@ -56,6 +57,12 @@
 
   <dependencies>
     <!-- Compile -->
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>${javax.servlet.version}</version>
+      <scope>provided</scope>
+    </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-webmvc</artifactId>
