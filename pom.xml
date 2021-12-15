@@ -86,6 +86,12 @@
       <groupId>uk.gov.companieshouse</groupId>
       <artifactId>structured-logging</artifactId>
       <version>${structured-logging.version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>ch.qos.logback</groupId>
+          <artifactId>logback-classic</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
 
     <dependency>
