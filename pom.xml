@@ -10,7 +10,7 @@
   <parent>
     <groupId>uk.gov.companieshouse</groupId>
     <artifactId>companies-house-parent</artifactId>
-    <version>1.3.0</version>
+    <version>1.3.1</version>
   </parent>
 
   <properties>
@@ -70,6 +70,15 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-webmvc</artifactId>
+    </dependency>
+    <!--
+         spring-core is a transitive dependency of spring security web. The version used by spring-security-web had a critical
+        vulnerability this version overrides that to a non-vulnerable version
+        -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-core</artifactId>
+      <version>5.3.28</version>
     </dependency>
 
     <dependency>
