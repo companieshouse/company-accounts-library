@@ -8,16 +8,18 @@ import static org.mockito.Mockito.when;
 
 import java.util.Optional;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import org.springframework.web.servlet.ModelAndView;
 import uk.gov.companieshouse.api.util.security.EricConstants;
 import uk.gov.companieshouse.api.util.security.Permission.Key;
 import uk.gov.companieshouse.api.util.security.Permission.Value;
@@ -35,6 +37,9 @@ class AuthenticationInterceptorTest {
 
     @Mock
     private HttpServletResponse response;
+
+    @Mock
+    private ModelAndView modelAndView;
 
     @Mock
     private TokenPermissions tokenPermissions;
@@ -78,5 +83,19 @@ class AuthenticationInterceptorTest {
 
     private void setupTokenPermissions() {
         doReturn(Optional.of(tokenPermissions)).when(interceptor).getTokenPermissions(request);
+    }
+
+    @Test
+    void testPostHandleAndAfterCompletion() throws Exception {
+        Object handler = new Object();
+        Exception ex = new Exception();
+        ModelAndView modelAndView = new ModelAndView();
+
+        AuthenticationInterceptor interceptor = new AuthenticationInterceptor();
+        AuthenticationInterceptor spyInterceptor = Mockito.spy(interceptor);
+        spyInterceptor.postHandle(request, response, handler, modelAndView);
+        spyInterceptor.afterCompletion(request, response, handler, ex);
+        Mockito.verify(spyInterceptor, Mockito.times(1)).postHandle(request, response, handler, modelAndView);
+        Mockito.verify(spyInterceptor, Mockito.times(1)).afterCompletion(request, response, handler, ex);
     }
 }
