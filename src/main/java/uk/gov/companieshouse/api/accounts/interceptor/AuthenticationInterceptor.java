@@ -4,10 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.ModelAndView;
 
 import uk.gov.companieshouse.api.util.security.AuthorisationUtil;
 import uk.gov.companieshouse.api.util.security.Permission.Key;
@@ -17,7 +18,7 @@ import uk.gov.companieshouse.api.util.security.TokenPermissions;
 import uk.gov.companieshouse.logging.Logger;
 import uk.gov.companieshouse.logging.LoggerFactory;
 
-public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
+public class AuthenticationInterceptor implements HandlerInterceptor {
 
     private static final Logger LOGGER = LoggerFactory.getLogger("company-accounts-library");
 
@@ -57,6 +58,18 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
         LOGGER.debugRequest(request, "AuthenticationInterceptor unauthorised", debugMap);
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         return false;
+    }
+
+    @Override
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView)
+            throws Exception {
+        // Implement the postHandle logic here if needed.
+    }
+
+    @Override
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
+            throws Exception {
+        // Implement the afterCompletion logic here if needed.
     }
 
     protected Optional<TokenPermissions> getTokenPermissions(HttpServletRequest request) {
