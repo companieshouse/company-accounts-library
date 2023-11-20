@@ -18,4 +18,4 @@ Things To consider
 
 ###### Pipeline
 
-+ Please use this [Pipeline](https://ci-platform.companieshouse.gov.uk/teams/team-development/pipelines/company-accounts-library) and make sure respective `source-code-main-21` or `source-code-main-8` task gets started once the PR is created or after the PR is merged to `main` or `main-8` and once the pipeline tasks are complete then use the created tags respectively.
++ Please use this [Pipeline](https://ci-platform.companieshouse.gov.uk/teams/team-development/pipelines/company-accounts-library) and make sure respective `source-code-main` or `source-code-main-8` task gets started once the PR is created or after the PR is merged to `main` or `main-8` and once the pipeline tasks are complete then use the created tags respectively.
