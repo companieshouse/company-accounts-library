@@ -20,9 +20,9 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
     <!-- Dependency Versions -->
-    <structured-logging.version>2.0.1</structured-logging.version>
+    <structured-logging.version>3.0.0</structured-logging.version>
     <javax.servlet.version>4.0.1</javax.servlet.version>
-    <api-security-java.version>1.0.1</api-security-java.version>
+    <api-security-java.version>2.0.0</api-security-java.version>
 
     <dependency-check-plugin.version>8.2.1</dependency-check-plugin.version>
 
