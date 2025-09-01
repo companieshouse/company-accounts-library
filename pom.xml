@@ -25,12 +25,11 @@
     <javax.servlet.version>4.0.1</javax.servlet.version>
     <api-security-java.version>2.0.11</api-security-java.version>
 
-    <spring-boot-dependencies.version>3.4.8</spring-boot-dependencies.version>
-    <spring-boot-maven-plugin.version>3.4.8</spring-boot-maven-plugin.version>
+    <spring-boot-dependencies.version>3.4.9</spring-boot-dependencies.version>
+    <spring-boot-maven-plugin.version>3.4.9</spring-boot-maven-plugin.version>
     <commons-lang3.version>3.18.0</commons-lang3.version>
     <gson.version>2.13.1</gson.version>
     <jakarta.servlet-api.version>6.0.0</jakarta.servlet-api.version>
-    <spring-core.version>6.2.9</spring-core.version>
     <!-- Maven and Surefire plugins -->
     <maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
     <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
@@ -78,15 +77,6 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-webmvc</artifactId>
-    </dependency>
-    <!--
-         spring-core is a transitive dependency of spring security web. The version used by spring-security-web had a critical
-        vulnerability this version overrides that to a non-vulnerable version
-        -->
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-core</artifactId>
-      <version>${spring-core.version}</version>
     </dependency>
 
     <dependency>
