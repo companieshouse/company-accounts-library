@@ -35,6 +35,15 @@
     <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
     <maven-jar-plugin.version>2.4</maven-jar-plugin.version>
     <junit-platform-surefire-provider.version>1.2.0</junit-platform-surefire-provider.version>
+    <!-- Sonar -->
+    <sonar.projectName>company-accounts-library</sonar.projectName>
+    <!--suppress UnresolvedMavenProperty -->
+    <sonar.host.url>${CODE_ANALYSIS_HOST_URL}</sonar.host.url>
+    <!--suppress UnresolvedMavenProperty -->
+    <sonar.token>${CODE_ANALYSIS_TOKEN}</sonar.token>
+    <sonar.login/>
+    <sonar.password/>
+    <sonar.projectKey>uk.gov.companieshouse:company-accounts-library</sonar.projectKey>
   </properties>
 
   <dependencyManagement>
