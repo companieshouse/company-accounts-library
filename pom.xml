@@ -25,7 +25,7 @@
     <javax.servlet.version>4.0.1</javax.servlet.version>
     <api-security-java.version>2.0.15</api-security-java.version>
 
-    <spring-boot-dependencies.version>3.4.9</spring-boot-dependencies.version>
+    <spring-boot-dependencies.version>3.5.7</spring-boot-dependencies.version>
     <spring-boot-maven-plugin.version>3.4.9</spring-boot-maven-plugin.version>
     <commons-lang3.version>3.19.0</commons-lang3.version>
     <gson.version>2.13.2</gson.version>
