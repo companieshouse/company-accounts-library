@@ -25,8 +25,8 @@
     <javax.servlet.version>4.0.1</javax.servlet.version>
     <api-security-java.version>2.0.15</api-security-java.version>
 
-    <spring-boot-dependencies.version>3.4.9</spring-boot-dependencies.version>
-    <spring-boot-maven-plugin.version>3.4.9</spring-boot-maven-plugin.version>
+    <spring-boot-dependencies.version>3.5.9</spring-boot-dependencies.version>
+    <spring-boot-maven-plugin.version>3.5.9</spring-boot-maven-plugin.version>
     <commons-lang3.version>3.19.0</commons-lang3.version>
     <gson.version>2.13.2</gson.version>
     <jakarta.servlet-api.version>6.1.0</jakarta.servlet-api.version>
@@ -42,19 +42,36 @@
     <sonar.host.url>${CODE_ANALYSIS_HOST_URL}</sonar.host.url>
     <!--suppress UnresolvedMavenProperty -->
     <sonar.token>${CODE_ANALYSIS_TOKEN}</sonar.token>
-    <sonar.login/>
-    <sonar.password/>
+    <sonar.login></sonar.login>
+    <sonar.password></sonar.password>
     <sonar.projectKey>uk.gov.companieshouse:company-accounts-library</sonar.projectKey>
+    <sonar.sources>src/main</sonar.sources>
+    <sonar.tests>src/test</sonar.tests>
+    <sonar.verbose>true</sonar.verbose>
+    <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/target/site/jacoco/jacoco.xml,
+      ${project.basedir}/target/site/jacoco-it/jacoco.xml
+    </sonar.coverage.jacoco.xmlReportPaths>
+    <sonar.jacoco.reports>${project.basedir}/target/site</sonar.jacoco.reports>
+    <sonar.java.binaries>${project.basedir}/target,${project.basedir}/target/*</sonar.java.binaries>
+
+    <junit-bom.version>5.10.5</junit-bom.version>
   </properties>
 
   <dependencyManagement>
     <dependencies>
       <dependency>
         <groupId>org.springframework.boot</groupId>
-          <artifactId>spring-boot-dependencies</artifactId>
-          <version>${spring-boot-dependencies.version}</version>
-          <type>pom</type>
-          <scope>import</scope>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>${spring-boot-dependencies.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.junit</groupId>
+        <artifactId>junit-bom</artifactId>
+        <version>${junit-bom.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -130,8 +147,12 @@
     <!-- Test -->
     <dependency>
       <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-engine</artifactId>
-      <version>${junit-jupiter-engine.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -171,14 +192,12 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>${maven-surefire-plugin.version}</version>
-        <dependencies>
-          <dependency>
-            <groupId>org.junit.platform</groupId>
-            <artifactId>junit-platform-surefire-provider</artifactId>
-            <version>${junit-platform-surefire-provider.version}</version>
-          </dependency>
-        </dependencies>
+        <version>3.0.0-M9</version>
+        <configuration>
+          <includes>
+            <include>**/*Test.java</include>
+          </includes>
+        </configuration>
       </plugin>
       <plugin>
         <groupId>org.jacoco</groupId>

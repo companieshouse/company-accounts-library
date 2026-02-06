@@ -29,8 +29,7 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
      * permissions
      */
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-            throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
 
         // skip token permission checks if an api key is used, api key elevated privileges are checked in other interceptors
         // inside company accounts and abridged accounts api services
@@ -61,14 +60,12 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
     }
 
     @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView)
-            throws Exception {
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) {
         // Implement the postHandle logic here if needed.
     }
 
     @Override
-    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
-            throws Exception {
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
         // Implement the afterCompletion logic here if needed.
     }
 

@@ -15,7 +15,7 @@ public interface AccountsDatesHelper {
      * @param stringDate
      * @return 
      */
-    public LocalDate convertStringToDate(String stringDate);
+    LocalDate convertStringToDate(String stringDate);
     
     /**
      * Takes a {@link String} in "yyyy-MM-dd'T'HH:mm:ss.SSSZ" format and converts it to a Java 8 {@link LocalDate}
@@ -23,7 +23,7 @@ public interface AccountsDatesHelper {
      * @param dateTimeString
      * @return
      */
-    public LocalDate getLocalDatefromDateTimeString(String dateTimeString, ZoneId zoneId);
+    LocalDate getLocalDatefromDateTimeString(String dateTimeString, ZoneId zoneId);
     
     
     /**
@@ -32,7 +32,7 @@ public interface AccountsDatesHelper {
      * @param date
      * @return
      */
-    public String convertDateToString(LocalDate date);
+    String convertDateToString(LocalDate date);
 
     /**
      * Formats a {@link String} date
@@ -40,7 +40,7 @@ public interface AccountsDatesHelper {
      * @param date
      * @return
      */
-    public String convertLocalDateToDisplayDate(LocalDate date) ;
+    String convertLocalDateToDisplayDate(LocalDate date) ;
 
     /**
      * Returns a date and time object from {@link String} date 
@@ -48,7 +48,7 @@ public interface AccountsDatesHelper {
      * @param dateString
      * @return
      */
-    public Map<String, String> getDateAndTime(String dateString, ZoneId zoneId);
+    Map<String, String> getDateAndTime(String dateString, ZoneId zoneId);
 
     /**
      * Generate balance sheet header string to display on web and ixbrl templates based on period start and end
@@ -59,7 +59,7 @@ public interface AccountsDatesHelper {
      * @param isSameYear
      * @return
      */
-    public String generateBalanceSheetHeading(String periodStartString, String periodEndString, boolean isSameYear);
+    String generateBalanceSheetHeading(String periodStartString, String periodEndString, boolean isSameYear);
 
     /**
      * Generate balance sheet header string to display on web and ixbrl templates based on period start and end
@@ -70,7 +70,7 @@ public interface AccountsDatesHelper {
      * @param isSameYear
      * @return
      */
-    public String generateBalanceSheetHeading(LocalDate periodStart, LocalDate periodEnd, boolean isSameYear);
+    String generateBalanceSheetHeading(LocalDate periodStart, LocalDate periodEnd, boolean isSameYear);
 
     /**
      *Calculate balance sheet dates display format depending on range between period start and end dates
@@ -80,7 +80,7 @@ public interface AccountsDatesHelper {
      * @param isSameYear
      * @return
      */
-    public Map<String, String> calculatePeriodRange(LocalDate periodStart, LocalDate periodEnd, boolean isSameYear);
+    Map<String, String> calculatePeriodRange(LocalDate periodStart, LocalDate periodEnd, boolean isSameYear);
 
     /**
      * Returns true if given Java 8 {@link LocalDate} dates are in the same calendar year
@@ -89,7 +89,7 @@ public interface AccountsDatesHelper {
      * @param date2
      * @return
      */
-    public boolean isSameYear(LocalDate date1, LocalDate date2);
+    boolean isSameYear(LocalDate date1, LocalDate date2);
     
     
     /**
@@ -98,7 +98,7 @@ public interface AccountsDatesHelper {
      * @param date
      * @return {@link LocalDate}
      */
-    public LocalDate convertDateToLocalDate(Date date);
+    LocalDate convertDateToLocalDate(Date date);
     
     
     /**
@@ -107,7 +107,7 @@ public interface AccountsDatesHelper {
      * @param numDays
      * @return
      */
-    public List<LocalDate> getPreviousDays(LocalDate currentDate, int numDays);
+    List<LocalDate> getPreviousDays(LocalDate currentDate, int numDays);
 
     /**
      * Returns numDays number of LocalDates in an ArrayList after currentDate 
@@ -118,6 +118,6 @@ public interface AccountsDatesHelper {
      * @param now - today's date
      * @return
      */
-    public List<LocalDate> getFutureDays(LocalDate currentDate, int numDays);
+    List<LocalDate> getFutureDays(LocalDate currentDate, int numDays);
 
 }
