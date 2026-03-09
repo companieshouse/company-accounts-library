@@ -26,7 +26,7 @@ class AccountsDatesHelperImplTest {
     private AccountsDatesHelperImpl datesHelper = new AccountsDatesHelperImpl();
 
     @Test
-    void convertStringtoDate() throws ParseException {
+    void convertStringtoDate() {
 
         LocalDate testDate = LocalDate.parse("2017-03-05");
         LocalDate date = datesHelper.convertStringToDate("2017-03-05");
@@ -80,7 +80,7 @@ class AccountsDatesHelperImplTest {
     }
 
     @Test
-    void convertDatetoString() throws ParseException {
+    void convertDatetoString() {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(YYYY_MM_DD);
 
@@ -95,7 +95,7 @@ class AccountsDatesHelperImplTest {
     }
 
     @Test
-    void calculatePeriodRangeOver2Years() throws ParseException {
+    void calculatePeriodRangeOver2Years() {
 
         // Days difference over 2 years
         LocalDate testDateStart = LocalDate.parse("2013-03-07");
@@ -106,7 +106,7 @@ class AccountsDatesHelperImplTest {
     }
 
     @Test
-    void calculatePeriodRangeOver380() throws ParseException {
+    void calculatePeriodRangeOver380() {
 
         // Days difference over 380
         LocalDate testDateStart = LocalDate.parse("2015-03-07");
@@ -117,7 +117,7 @@ class AccountsDatesHelperImplTest {
     }
 
     @Test
-    void calculatePeriodRangeBelow350() throws ParseException {
+    void calculatePeriodRangeBelow350() {
 
         // Days difference below 350
         LocalDate testDateStart = LocalDate.parse("2016-08-03");
@@ -128,7 +128,7 @@ class AccountsDatesHelperImplTest {
     }
 
     @Test
-    void calculatePeriodLessThanOneMonth() throws ParseException {
+    void calculatePeriodLessThanOneMonth() {
 
         // Month difference less than one month
         LocalDate testDateStart = LocalDate.parse("2015-03-07");
@@ -139,7 +139,7 @@ class AccountsDatesHelperImplTest {
     }
 
     @Test
-    void calculatePeriodRangeBelow350RoundUp() throws ParseException {
+    void calculatePeriodRangeBelow350RoundUp() {
 
         // Days difference below 350 with month round up ( remaining days > 15 )
         LocalDate testDateStart = LocalDate.parse("2016-08-01");
@@ -150,7 +150,7 @@ class AccountsDatesHelperImplTest {
     }
 
     @Test
-    void calculatePeriodRangeSameYear() throws ParseException {
+    void calculatePeriodRangeSameYear() {
         // Same year
         LocalDate testDateEndLast = LocalDate.parse("2017-08-12");
         LocalDate testDateEndNext = LocalDate.parse("2017-11-23");
@@ -160,7 +160,7 @@ class AccountsDatesHelperImplTest {
     }
 
     @Test
-    void calculatePeriod12Months() throws ParseException {
+    void calculatePeriod12Months() {
         // 12 months acc period ( +/- 15 days )
         LocalDate testDateStart = LocalDate.parse("2016-08-12");
 

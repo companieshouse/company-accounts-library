@@ -70,7 +70,7 @@ class AuthenticationInterceptorTest {
 
     @Test
     @DisplayName("Test preHandle when TokenPermissions is not present in request")
-    void preHandleMissingTokenPermissions() throws Exception {
+    void preHandleMissingTokenPermissions() {
         assertThrows(IllegalStateException.class, () -> interceptor.preHandle(request, response, handler));
     }
 
