@@ -10,7 +10,7 @@
   <parent>
     <groupId>uk.gov.companieshouse</groupId>
     <artifactId>companies-house-parent</artifactId>
-    <version>2.1.12</version>
+    <version>3.0.0</version>
     <relativePath/>	
   </parent>
 
@@ -21,29 +21,15 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
     <!-- Dependency Versions -->
-    <structured-logging.version>3.0.42</structured-logging.version>
-    <javax.servlet.version>4.0.1</javax.servlet.version>
-    <api-security-java.version>2.0.15</api-security-java.version>
-
-    <spring-boot-dependencies.version>3.5.9</spring-boot-dependencies.version>
-    <spring-boot-maven-plugin.version>3.5.9</spring-boot-maven-plugin.version>
-    <commons-lang3.version>3.19.0</commons-lang3.version>
-    <gson.version>2.13.2</gson.version>
-    <jakarta.servlet-api.version>6.1.0</jakarta.servlet-api.version>
-    <junit-jupiter-engine.version>5.10.5</junit-jupiter-engine.version>
+    <spring-boot-dependencies.version>4.1.1</spring-boot-dependencies.version>
+    <spring-boot-maven-plugin.version>4.1.1</spring-boot-maven-plugin.version>
     <!-- Maven and Surefire plugins -->
-    <maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
-    <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
-    <maven-jar-plugin.version>2.4</maven-jar-plugin.version>
-    <junit-platform-surefire-provider.version>1.2.0</junit-platform-surefire-provider.version>
+    <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
+    <maven-jar-plugin.version>3.5.1</maven-jar-plugin.version>
     <!-- Sonar -->
     <sonar.projectName>company-accounts-library</sonar.projectName>
-    <!--suppress UnresolvedMavenProperty -->
     <sonar.host.url>${CODE_ANALYSIS_HOST_URL}</sonar.host.url>
-    <!--suppress UnresolvedMavenProperty -->
     <sonar.token>${CODE_ANALYSIS_TOKEN}</sonar.token>
-    <sonar.login></sonar.login>
-    <sonar.password></sonar.password>
     <sonar.projectKey>uk.gov.companieshouse:company-accounts-library</sonar.projectKey>
     <sonar.sources>src/main</sonar.sources>
     <sonar.tests>src/test</sonar.tests>
@@ -54,11 +40,29 @@
     <sonar.jacoco.reports>${project.basedir}/target/site</sonar.jacoco.reports>
     <sonar.java.binaries>${project.basedir}/target,${project.basedir}/target/*</sonar.java.binaries>
 
-    <junit-bom.version>5.10.5</junit-bom.version>
+    <testcontainers-bom.version>1.21.4</testcontainers-bom.version>
+    <ch-boms.version>0.1.34</ch-boms.version>
   </properties>
 
   <dependencyManagement>
     <dependencies>
+      <!-- Import CH BOM first so CH-approved versions (CVE overrides) take precedence -->
+      <dependency>
+        <groupId>uk.gov.companieshouse</groupId>
+        <artifactId>ch-dependency-bom</artifactId>
+        <version>${ch-boms.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>uk.gov.companieshouse</groupId>
+        <artifactId>ch-test-bom</artifactId>
+        <version>${ch-boms.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
       <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-dependencies</artifactId>
@@ -66,41 +70,32 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
+
       <dependency>
-        <groupId>org.junit</groupId>
-        <artifactId>junit-bom</artifactId>
-        <version>${junit-bom.version}</version>
+        <groupId>org.testcontainers</groupId>
+        <artifactId>testcontainers-bom</artifactId>
+        <version>${testcontainers-bom.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
+
+
     </dependencies>
   </dependencyManagement>
 
   <dependencies>
-    <!-- Compile -->
-<!--    Jacson dependencies below will need to be removed as well once the upgrade to newer versions of spring boot-->
-    <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-core</artifactId>
-      <version>${jackson.version}</version>
-    </dependency>
+
     <dependency>
       <groupId>jakarta.servlet</groupId>
       <artifactId>jakarta.servlet-api</artifactId>
-      <version>${jakarta.servlet-api.version}</version>
       <scope>provided</scope>
     </dependency>
+
     <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
+      <groupId>tools.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
-      <version>${jackson.version}</version>
     </dependency>
-    <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>javax.servlet-api</artifactId>
-      <version>${javax.servlet.version}</version>
-      <scope>provided</scope>
-    </dependency>
+
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-webmvc</artifactId>
@@ -109,7 +104,6 @@
     <dependency>
       <groupId>uk.gov.companieshouse</groupId>
       <artifactId>structured-logging</artifactId>
-      <version>${structured-logging.version}</version>
       <exclusions>
         <!-- Excluding to address CVE-2025-48924. commons-lang3-3.17.0 is pulled transitively-->
         <exclusion>
@@ -123,13 +117,11 @@
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
-      <version>${commons-lang3.version}</version>
     </dependency>
 
     <dependency>
       <groupId>uk.gov.companieshouse</groupId>
       <artifactId>api-security-java</artifactId>
-      <version>${api-security-java.version}</version>
       <exclusions>
         <!-- Excluding to address CVE-2025-53864. gson-2.11.0 is pulled transitively-->
         <exclusion>
@@ -141,7 +133,6 @@
     <dependency>
       <groupId>com.google.code.gson</groupId>
       <artifactId>gson</artifactId>
-      <version>${gson.version}</version>
     </dependency>
 
     <!-- Test -->
@@ -160,6 +151,16 @@
       <artifactId>mockito-junit-jupiter</artifactId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <scope>test</scope>
+    </dependency>
+
   </dependencies>
 
   <build>
